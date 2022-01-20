@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
-		<HomePage :cards="cards" />
-		<AddCardPage />
+		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" />
+		<AddCardPage v-else />
 	</div>
 </template>
 
@@ -17,6 +17,7 @@ export default {
 	},
 	data() {
 		return {
+      currentView: "home",
 			cards: [
 				{
 					vendor: "Bitcoin Inc",
@@ -54,44 +55,54 @@ export default {
 					CCV: 212,
 					active: false,
 				},
-				{
-					vendor: "Blockchain Inc",
-					cardNumber: "1235212125ds333 123",
-					cardHolder: "mr Babruh",
-					expireMonth: "02",
-					expireYear: 23,
-					CCV: 212,
-					active: false,
-				},
-				{
-					vendor: "Ninja Bank",
-					cardNumber: "1235as21212333 123",
-					cardHolder: "mr Babruh",
-					expireMonth: "02",
-					expireYear: 23,
-					CCV: 212,
-					active: false,
-				},
-				{
-					vendor: "Blockchain Inc",
-					cardNumber: "12352a12125ds333 123",
-					cardHolder: "mr Babruh",
-					expireMonth: "02",
-					expireYear: 23,
-					CCV: 212,
-					active: false,
-				},
-				{
-					vendor: "Blockchain Inc",
-					cardNumber: "12352121a25ds333 123",
-					cardHolder: "mr Babruh",
-					expireMonth: "02",
-					expireYear: 23,
-					CCV: 212,
-					active: false,
-				},
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "1235212125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Ninja Bank",
+				// 	cardNumber: "1235as21212333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "12352a12125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "12352121a25ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
 			],
 		};
+	},
+	methods: {
+		toggleActive(index) {
+    for (const elem of this.cards) {
+      if(elem.active === true){
+        elem.active = false
+      }
+    }
+      this.cards[index].active = !this.cards[index].active
+		},
 	},
 };
 </script>

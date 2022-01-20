@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<ul v-for="(card, i) in cards" :key="card.cardNumber">
-      <CardItem v-if="card.active" :card="card" class="active"/>
-			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer'+' l-'+i" :index="i"/>
+			<CardItem v-if="card.active" :card="card" class="active" />
+			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer' + ' l-' + i" :index="i" />
 		</ul>
 	</div>
 </template>
@@ -17,14 +17,11 @@ export default {
 		cards: Array,
 	},
 	methods: {
-		toggleActive(test) {
-			console.log(test);
+		toggleActive(index) {
+			this.$emit("toggleActive", index);
 		},
 	},
 };
 </script>
 
-<style lang="scss" scoped>
-
-
-</style>
+<style lang="scss" scoped></style>
