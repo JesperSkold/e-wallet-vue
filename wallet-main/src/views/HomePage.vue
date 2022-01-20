@@ -2,7 +2,7 @@
 	<main>
 		<h1>E-WALLET</h1>
 		<h5>ACTIVE CARD</h5>
-		<h5 v-if="checkIfActive">Set your active card by clicking on it</h5>
+		<h5>{{checkIfActives}}</h5>
 		<CardList :cards="cards" @toggleActive="toggleActive" />
 		<button>SADFASDFASD</button>
 	</main>
@@ -26,14 +26,17 @@ export default {
 		toggleActive(index) {
 			this.$emit("toggleActive", index);
 		},
-		checkIfActives() {
-			for (const obj of this.cards) {
-				if (obj.active === true) {
-					this.checkIfActive = false;
-				}
-			}
-			return this.checkIfActive;
-		},
+	},
+	computed: {
+    checkIfActives(){
+      for (const obj of this.cards) {
+        console.log("yo");
+        if (obj.active === true) {
+          return ""
+        }
+      }
+  return "Pick a card, any card"
+}
 	},
 };
 </script>

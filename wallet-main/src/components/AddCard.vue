@@ -70,10 +70,9 @@ li {
 	right: 0;
 	margin-left: auto;
 	margin-right: auto;
+  color: red;
 }
-li {
-  display: flex;
-}
+
 
 // .active {  
 // 	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
