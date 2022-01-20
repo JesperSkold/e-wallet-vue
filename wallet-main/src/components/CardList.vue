@@ -26,18 +26,18 @@ export default {
 
 <style lang="scss" scoped>
 .lol{
-	padding: 0;
-	margin: 0;
   height: 85vh;
+	margin: 0;
+	padding: 0;
   position: relative;
 //  .spacer {
 //    height: 20rem;
 //    width: 100%;
 //  }
   ul{
-		margin: 0;
-		padding: 0;
-    min-width: 100vw;
+    min-width: 95vw;
+    margin: 0;
+    padding: 0;
   }
 }
 

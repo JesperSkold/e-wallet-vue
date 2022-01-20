@@ -53,9 +53,10 @@ $maxCards: 8;
 	.l-#{$i} {
 		position: absolute;
 		top: 25rem + ($i * 2);
+		-webkit-box-shadow: 5px 5px 25px -6px rgba(0, 0, 0, 0.22);
+		box-shadow: 5px 5px 25px -6px rgba(0, 0, 0, 0.22);
 	}
 }
-
 
 // .l-14 {
 //   margin-top: 40rem;
@@ -72,10 +73,9 @@ li {
 	margin-right: auto;
 }
 
-
-// .active {  
-// 	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-// 	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-// 	box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-// }
+.active {
+	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+	box-shadow: 0px 0px 105px 15px rgba(255, 213, 46, 0.9);
+}
 </style>
