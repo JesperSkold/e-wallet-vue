@@ -17,7 +17,7 @@ export default {
 	},
 	data() {
 		return {
-      currentView: "home",
+			currentView: "home",
 			cards: [
 				{
 					vendor: "Bitcoin Inc",
@@ -44,11 +44,47 @@ export default {
 					expireMonth: "02",
 					expireYear: 23,
 					CCV: 212,
-					active: true,
+					active: false,
 				},
 				{
 					vendor: "Blockchain Inc",
 					cardNumber: "1235212125s333 123",
+					cardHolder: "mr Babruh",
+					expireMonth: "02",
+					expireYear: 23,
+					CCV: 212,
+					active: false,
+				},
+				{
+					vendor: "Blockchain Inc",
+					cardNumber: "1235212125dxs333 123",
+					cardHolder: "mr Babruh",
+					expireMonth: "02",
+					expireYear: 23,
+					CCV: 212,
+					active: false,
+				},
+				{
+					vendor: "Ninja Bank",
+					cardNumber: "1235xas21212333 123",
+					cardHolder: "mr Babruh",
+					expireMonth: "02",
+					expireYear: 23,
+					CCV: 212,
+					active: false,
+				},
+				{
+					vendor: "Blockchain Inc",
+					cardNumber: "12352a12125dxs333 123",
+					cardHolder: "mr Babruh",
+					expireMonth: "02",
+					expireYear: 23,
+					CCV: 212,
+					active: false,
+				},
+				{
+					vendor: "Blockchain Inc",
+					cardNumber: "1235212x125s333 123",
 					cardHolder: "mr Babruh",
 					expireMonth: "02",
 					expireYear: 23,
@@ -84,27 +120,135 @@ export default {
 				// },
 				// {
 				// 	vendor: "Blockchain Inc",
-				// 	cardNumber: "12352121a25ds333 123",
+				// 	cardNumber: "1235212125s333 123",
 				// 	cardHolder: "mr Babruh",
 				// 	expireMonth: "02",
 				// 	expireYear: 23,
 				// 	CCV: 212,
 				// 	active: false,
 				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "1235212125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Ninja Bank",
+				// 	cardNumber: "1235as21212333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "12352a12125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "1235212125s333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "1235212125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Ninja Bank",
+				// 	cardNumber: "1235as21212333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "12352a12125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "1235212125s333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "1235212125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Ninja Bank",
+				// 	cardNumber: "1235as21212333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+				// {
+				// 	vendor: "Blockchain Inc",
+				// 	cardNumber: "12352a12125ds333 123",
+				// 	cardHolder: "mr Babruh",
+				// 	expireMonth: "02",
+				// 	expireYear: 23,
+				// 	CCV: 212,
+				// 	active: false,
+				// },
+	
 			],
 		};
 	},
 	methods: {
 		toggleActive(index) {
-    for (const elem of this.cards) {
-      if(elem.active === true){
-        elem.active = false
-      }
-    }
-      this.cards[index].active = !this.cards[index].active
+			for (const elem of this.cards) {
+				if (elem.active === true) {
+					elem.active = false;
+				}
+			}
+			this.cards[index].active = !this.cards[index].active;
 		},
 	},
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+body{
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+
+</style>

@@ -4,7 +4,7 @@
 		<p>BITCOIN/COIN</p>
 		<p>SIGNAL</p>
 		<p>CHIP</p>
-		<h1>{{ card.cardNumber}}</h1>
+		<p>{{ card.cardNumber }}</p>
 		<p>cardholder name</p>
 		<p>{{ card.cardHolder }}</p>
 		<p>VALID UNTIL</p>
@@ -17,11 +17,11 @@ export default {
 	props: {
 		card: Object,
 		layerIndex: String,
-    index: Number
+		index: Number,
 	},
 	data() {
 		return {
-      isActive: false,
+			isActive: false,
 			cardColor: "",
 		};
 	},
@@ -47,27 +47,37 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// $max: 100;
 // $step: 7rem;
-@for $i from 0 through 50 {
+$maxCards: 8;
+@for $i from 0 through $maxCards {
 	.l-#{$i} {
-		top: 30rem + ($i * 2);
+		position: absolute;
+		top: 25rem + ($i * 2);
 	}
 }
+
+
+// .l-14 {
+//   margin-top: 40rem;
+//   position: static;
+// }
 
 li {
 	border: 1px black solid;
 	width: 30rem;
 	list-style: none;
+	left: 0;
+	right: 0;
+	margin-left: auto;
+	margin-right: auto;
 }
-.layer {
-	position: absolute;
-}
-
-.active {
-	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-	box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+li {
+  display: flex;
 }
 
+// .active {  
+// 	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+// 	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+// 	box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+// }
 </style>
