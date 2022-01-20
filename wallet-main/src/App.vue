@@ -247,8 +247,12 @@ export default {
 body{
   min-height: 100vh;
   margin: 0;
-  padding: 0;
+	padding: 0;
 }
+// *{
+// 	margin: 0;
+// 	padding: 0;
+// }
 
 
 </style>

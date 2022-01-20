@@ -1,14 +1,9 @@
 <template>
 	<div class="lol">
 		<ul v-for="(card, i) in cards" :key="card.cardNumber" >
-      <div :class="{'activeContainer' : card.active}">
 			<CardItem v-if="card.active" :card="card" class="active" />
-      </div>
 			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer' + ' l-' + i" :index="i"/>
 		</ul>
-    <div class="spacer-container">
-    <div class="spacer"></div>
-    </div>
 	</div>
 </template>
 
@@ -31,6 +26,8 @@ export default {
 
 <style lang="scss" scoped>
 .lol{
+	padding: 0;
+	margin: 0;
   height: 85vh;
   position: relative;
 //  .spacer {
@@ -38,9 +35,9 @@ export default {
 //    width: 100%;
 //  }
   ul{
-    width: 100vw;
-    margin: 0;
-    padding: 0;
+		margin: 0;
+		padding: 0;
+    min-width: 100vw;
   }
 }
 

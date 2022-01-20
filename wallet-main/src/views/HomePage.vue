@@ -30,12 +30,11 @@ export default {
 	computed: {
     checkIfActives(){
       for (const obj of this.cards) {
-        console.log("yo");
         if (obj.active === true) {
           return ""
         }
       }
-  return "Pick a card, any card"
+  return "You dont have an active card yet, pick a card to activate it!"
 }
 	},
 };
@@ -43,16 +42,22 @@ export default {
 
 <style lang="scss" scoped>
 main {
+	margin: 0;
+	padding: 0;
 	min-height: 100vh;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	h5 {
+	h5,h1 {
 		margin: 0;
 		padding: 0;
 	}
+	h1{
+		margin-top: 2rem;
+	}
 }
+
 button {
 	margin: 1rem;
 	position: relative;
