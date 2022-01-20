@@ -77,7 +77,7 @@ Brödtext: [PT Mono](https://fonts.google.com/specimen/PT+Mono?query=PT+Mono)
 **För att Väl Godkänt ska du:**
 * Spara korten och alla nya kort som läggs till i local storage samt läsa från local storage
 * Det ska gå att ta bort ett kort med en bekräftelse-dialog
-* Fälten när en kort läggs till ska valideras så du i fältet kortnummer enbart kan mata in siffror och max är 16 siffror. Fältet för namn ska enbart ta bokstäver.
+* Fälten när ett kort läggs till ska valideras så du i fältet med kortnummer enbart kan mata in siffror och max är 16 siffror. Fältet för namn ska enbart ta bokstäver.
 * Validera så att du inte kan lägga till två kort med samma nummer
 
 
