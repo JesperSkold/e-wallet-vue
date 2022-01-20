@@ -24,7 +24,7 @@ Tekniker du ska använda i denna app är följande:
 
 * Vid klick på **Add new card** ska man visa AddCard-view.
 
-* AddCard-viewn ska 
+* AddCard-viewn ska ha ett formulär som speglas i en preview hur kortet skulle se ut.
 
 * Varje nytt card som läggs till ska synas i en lista i denna vy.
 
