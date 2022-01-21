@@ -84,17 +84,7 @@
 			<ul v-if="errors.length">
 				<li v-for="error in errors" :key="error">{{ error }}</li>
 			</ul>
-			<button
-				v-if="filledOutForm"
-				type="button"
-				@click="
-					$emit('toHome');
-					submitCard();
-				"
-			>
-				ADD CARD
-			</button>
-			<button v-else @click="validateForm" type="button">ADD CARD</button>
+			<button @click="validateForm" type="button">ADD CARD</button>
 		</form>
 	</main>
 </template>
@@ -149,7 +139,7 @@ export default {
 				this.errors.push("Fill out your card without spaces!");
 			} else if (!this.card.cardNumber.match(/^\d+$/)) {
 				this.errors.push("You can only have numbers in your card number!");
-			}else if (this.card.cardNumber.length < 12 || this.card.cardNumber.length > 12){
+			}else if (this.card.cardNumber.length < 16 || this.card.cardNumber.length > 16){
 				this.errors.push("Your card number needs to be exactly 12 numbers!")
 			}
 
@@ -163,6 +153,8 @@ export default {
 
 			if (!this.errors.length) {
 				this.filledOutForm = true;
+					this.$emit('toHome');
+					this.submitCard();
 			}
 		},
 	},
