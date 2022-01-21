@@ -27,11 +27,11 @@
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="">CARD NUMBER</label>
-				<input type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @keydown="errors = []" />
+				<input type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="errors = []" />
 			</div>
 			<div>
 				<label for="">CARDHOLDER NAME</label>
-				<input type="text" placeholder="FirstName LastName" v-model="card.cardHolder" required @keydown="errors = []" />
+				<input type="text" placeholder="FirstName LastName" v-model="card.cardHolder" required @focus="errors = []" />
 			</div>
 
 			<div class="month-year">
