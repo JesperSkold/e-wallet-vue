@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'"/>
-		<AddCardPage v-else />
+		<AddCardPage v-else @toHome="currentView ='home'"/>
 	</div>
 </template>
 

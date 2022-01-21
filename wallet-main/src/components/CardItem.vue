@@ -107,6 +107,7 @@ li {
 }
 
 .card-number {
+	height: 3rem;
 	margin: .5rem;
 	padding: 0;
 	font-size: 3rem;
