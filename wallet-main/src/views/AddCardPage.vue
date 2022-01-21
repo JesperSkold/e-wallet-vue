@@ -2,9 +2,9 @@
 	<main>
 		<h1>ADD NEW CARD</h1>
 		<h5>NEW CARD</h5>
-		<div class="card" :style="{'background':cardColor}">
+		<div class="card" :style="{ background: cardColor }">
 			<div class="vendor-placeholder">
-				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="" class="vendor" />
+				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 			</div>
 			<div class="chip-signal-box">
 				<img src="../assets/wifi.svg" alt="" class="signal" />
@@ -23,14 +23,15 @@
 				</div>
 			</div>
 		</div>
+
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="">CARD NUMBER</label>
-				<input type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" />
+				<input type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @keydown="errors = []" />
 			</div>
 			<div>
 				<label for="">CARDHOLDER NAME</label>
-				<input type="text" placeholder="FirstName LastName" v-model="card.cardHolder" />
+				<input type="text" placeholder="FirstName LastName" v-model="card.cardHolder" required @keydown="errors = []" />
 			</div>
 
 			<div class="month-year">
@@ -38,7 +39,7 @@
 					<label for="">MONTH</label>
 					<!-- 12-->
 					<!-- <input type="number" /> -->
-					<select name="" id="" v-model="card.expireMonth">
+					<select name="" id="" v-model="card.expireMonth" required>
 						<option value="" disabled selected hidden></option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -58,7 +59,7 @@
 					<label for="">YEAR</label>
 					<!-- 21-25-->
 					<!-- <input type="number" /> -->
-					<select name="" id="" v-model="card.expireYear">
+					<select name="" id="" v-model="card.expireYear" required>
 						<option value="" disabled selected hidden></option>
 						<option value="22">22</option>
 						<option value="23">23</option>
@@ -71,7 +72,7 @@
 
 			<div class="vendor-container">
 				<label for="">VENDOR</label>
-				<select select name="" id="" v-model="card.vendor" @change="changeCardColor">
+				<select select name="" id="" v-model="card.vendor" @change="changeCardColor" required>
 					<option value="" disabled selected hidden></option>
 					<option value="bitcoin">Bitcoin Inc</option>
 					<option value="blockchain">Blockchain Inc</option>
@@ -79,7 +80,21 @@
 					<option value="ninja">Ninja Bank</option>
 				</select>
 			</div>
-		<button type="button" @click="$emit('toHome'); submitCard()">ADD CARD</button>
+
+			<ul v-if="errors.length">
+				<li v-for="error in errors" :key="error">{{ error }}</li>
+			</ul>
+			<button
+				v-if="filledOutForm"
+				type="button"
+				@click="
+					$emit('toHome');
+					submitCard();
+				"
+			>
+				ADD CARD
+			</button>
+			<button v-else @click="validateForm" type="button">ADD CARD</button>
 		</form>
 	</main>
 </template>
@@ -88,6 +103,8 @@
 export default {
 	data() {
 		return {
+			errors: [],
+			filledOutForm: false,
 			cardColor: "",
 			card: {
 				vendor: "",
@@ -105,24 +122,49 @@ export default {
 			switch (this.card.vendor) {
 				case "bitcoin":
 					this.cardColor = "yellow";
-          break;
+					break;
 				case "blockchain":
-          this.cardColor = "purple";
-          break;
+					this.cardColor = "purple";
+					break;
 				case "evil":
 					this.cardColor = "red";
-          break;
+					break;
 				case "ninja":
 					this.cardColor = "grey";
-          break;
+					break;
 				default:
 					this.cardColor = "black";
 			}
 		},
-    submitCard(){
-      console.log("yo");
-      this.$emit("card", {...this.card})
-    }
+		submitCard() {
+			console.log("yo");
+			this.$emit("card", { ...this.card });
+		},
+		validateForm() {
+			this.errors = [];
+			if (this.card.cardNumber === "") {
+				console.log(this.errors);
+				this.errors.push("You must fill out your card number!");
+			} else if (this.card.cardNumber.match(/\s+/g)) {
+				this.errors.push("Fill out your card without spaces!");
+			} else if (!this.card.cardNumber.match(/^\d+$/)) {
+				this.errors.push("You can only have numbers in your card number!");
+			}else if (this.card.cardNumber.length < 12 || this.card.cardNumber.length > 12){
+				this.errors.push("Your card number needs to be exactly 12 numbers!")
+			}
+
+			if (this.card.cardHolder === "") {
+				this.errors.push("You must fill out your name!");
+			} else if (this.card.cardNumber.match(/^[A-Za-z]+$/)) {
+				this.errors.push("You cant have numbers in your name!");
+			} else if (this.card.cardHolder.length > 40) {
+				this.errors.push("I'm sorry if you have a long name, but it cant be more than twenty letters!");
+			}
+
+			if (!this.errors.length) {
+				this.filledOutForm = true;
+			}
+		},
 	},
 };
 </script>
@@ -174,6 +216,7 @@ form > div {
 }
 
 button {
+	cursor: pointer;
 	margin-top: 2rem;
 	background: none;
 	font-size: 1.6rem;
@@ -187,6 +230,8 @@ button {
 }
 
 .card {
+	overflow: hidden;
+	border-radius: 1rem;
 	height: 21.8rem;
 	width: 35rem;
 	background: grey;

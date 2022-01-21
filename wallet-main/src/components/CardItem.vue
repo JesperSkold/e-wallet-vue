@@ -1,21 +1,21 @@
 <template>
 	<!-- <li @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex"> -->
 	<li @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex">
-		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="" class="vendor"/>
+		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 		<div class="chip-signal-box">
-		<img src="../assets/wifi.svg" alt="" class="signal">
-		<img src="../assets/chip.svg" alt="" class="chip">
+			<img src="../assets/wifi.svg" alt="" class="signal" />
+			<img src="../assets/chip.svg" alt="" class="chip" />
 		</div>
 		<p class="card-number">{{ card.cardNumber }}</p>
 		<div class="bottom-text">
-		<div class="card-holder">
-		<p class="name">CARDHOLDER NAME</p>
-		<p class="real-name">{{ card.cardHolder }}</p>
-		</div>
-		<div class="valid-text">
-		<p class="valid-until">VALID UNTIL</p>
-		<p class="valid-expire">{{ card.expireMonth }}/{{ card.expireYear }}</p>
-		</div>
+			<div class="card-holder">
+				<p class="name">CARDHOLDER NAME</p>
+				<p class="real-name">{{ card.cardHolder }}</p>
+			</div>
+			<div class="valid-text">
+				<p class="valid-until">VALID UNTIL</p>
+				<p class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
+			</div>
 		</div>
 	</li>
 </template>
@@ -56,7 +56,7 @@ export default {
 
 <style lang="scss" scoped>
 // $step: 7rem;
-$maxCards: 50;
+$maxCards: 100;
 @for $i from 0 through $maxCards {
 	.l-#{$i} {
 		position: absolute;
@@ -83,7 +83,6 @@ li {
 	border-radius: 1rem;
 }
 
-
 .active {
 	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
 	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
@@ -91,15 +90,15 @@ li {
 }
 
 .vendor {
-	margin: .5rem 0 0 30rem;
+	margin: 0.5rem 0 0 30rem;
 }
 
-.chip{
+.chip {
 	background: white;
-	border-radius: .5rem;
+	border-radius: 0.5rem;
 }
 
-.chip-signal-box{
+.chip-signal-box {
 	display: flex;
 	margin-left: 1rem;
 	flex-direction: column;
@@ -108,7 +107,7 @@ li {
 
 .card-number {
 	height: 3rem;
-	margin: .5rem;
+	margin: 0.5rem;
 	padding: 0;
 	font-size: 3rem;
 	text-align: center;
@@ -116,12 +115,12 @@ li {
 }
 
 .card-holder p {
-margin: 0;
-padding: 0;
+	margin: 0;
+	padding: 0;
 }
 
 .card-holder .name {
-	margin: .5rem 0;
+	margin: 0.5rem 0;
 }
 
 .real-name {
@@ -133,13 +132,13 @@ padding: 0;
 	margin: 1rem;
 	justify-content: space-between;
 }
-.valid-text .valid-until{
-	margin: .5rem 0;
+.valid-text .valid-until {
+	margin: 0.5rem 0;
 }
 
 .valid-expire {
-text-align: end;
-font-size: 1.5rem;
+	text-align: end;
+	font-size: 1.5rem;
 }
 .valid-text p {
 	padding: 0;

@@ -61,7 +61,6 @@ export default {
 	methods: {
 		saveCard(card){
 			this.cards.push(card)
-			console.log(card);
 		},
 		toggleActive(index) {
 			for (const elem of this.cards) {
