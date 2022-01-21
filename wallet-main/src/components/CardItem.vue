@@ -1,7 +1,7 @@
 <template>
 	<!-- <li @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex"> -->
 	<li @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex">
-		<img src="../assets/bitcoin.svg" alt="" class="vendor">
+		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="" class="vendor"/>
 		<div class="chip-signal-box">
 		<img src="../assets/wifi.svg" alt="" class="signal">
 		<img src="../assets/chip.svg" alt="" class="chip">
@@ -35,20 +35,20 @@ export default {
 	},
 	mounted() {
 		switch (this.card.vendor) {
-			case "Bitcoin Inc":
+			case "bitcoin":
 				this.cardColor = "yellow";
 				break;
-			case "Blockchain Inc":
+			case "blockchain":
 				this.cardColor = "purple";
 				break;
-			case "Evil Corp":
+			case "evil":
 				this.cardColor = "red";
 				break;
-			case "Ninja Bank":
+			case "ninja":
 				this.cardColor = "grey";
 				break;
 			default:
-				this.cardColor = "black";
+				this.cardColor = "grey";
 		}
 	},
 };

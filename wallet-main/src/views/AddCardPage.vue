@@ -2,10 +2,10 @@
 	<main>
 		<h1>ADD NEW CARD</h1>
 		<h5>NEW CARD</h5>
-		<div class="card">
-      <div class="vendor-placeholder">
-			<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="" class="vendor" />
-      </div>
+		<div class="card" :style="{'background':cardColor}">
+			<div class="vendor-placeholder">
+				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="" class="vendor" />
+			</div>
 			<div class="chip-signal-box">
 				<img src="../assets/wifi.svg" alt="" class="signal" />
 				<img src="../assets/chip.svg" alt="" class="chip" />
@@ -18,12 +18,12 @@
 				</div>
 				<div class="valid-text">
 					<p class="valid-until">VALID UNTIL</p>
-          <p v-if="card.expireMonth === '' && card.expireYear === ''" class="valid-expire">MM / YY</p>
+					<p v-if="card.expireMonth === '' && card.expireYear === ''" class="valid-expire">MM / YY</p>
 					<p v-else class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
 				</div>
 			</div>
 		</div>
-		<form action="">
+		<form @submit.prevent="submitCard">
 			<div>
 				<label for="">CARD NUMBER</label>
 				<input type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" />
@@ -38,40 +38,40 @@
 					<label for="">MONTH</label>
 					<!-- 12-->
 					<!-- <input type="number" /> -->
-          <select name="" id="" v-model="card.expireMonth">
-            <option value="" disabled selected hidden></option>
-            <option value="01">01</option>
-            <option value="02">02</option>
-            <option value="03">03</option>
-            <option value="04">04</option>
-            <option value="05">05</option>
-            <option value="06">06</option>
-            <option value="07">07</option>
-            <option value="08">08</option>
-            <option value="09">09</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-          </select>
+					<select name="" id="" v-model="card.expireMonth">
+						<option value="" disabled selected hidden></option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
 				</div>
 				<div class="year-container">
 					<label for="">YEAR</label>
 					<!-- 21-25-->
 					<!-- <input type="number" /> -->
-          <select name="" id="" v-model="card.expireYear">
-            <option value="" disabled selected hidden></option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-            <option value="26">26</option>
-          </select>
+					<select name="" id="" v-model="card.expireYear">
+						<option value="" disabled selected hidden></option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+					</select>
 				</div>
 			</div>
 
 			<div class="vendor-container">
 				<label for="">VENDOR</label>
-				<select select name="" id="" v-model="card.vendor">
+				<select select name="" id="" v-model="card.vendor" @change="changeCardColor">
 					<option value="" disabled selected hidden></option>
 					<option value="bitcoin">Bitcoin Inc</option>
 					<option value="blockchain">Blockchain Inc</option>
@@ -79,8 +79,8 @@
 					<option value="ninja">Ninja Bank</option>
 				</select>
 			</div>
+		<button type="button" @click="$emit('toHome'); submitCard()">ADD CARD</button>
 		</form>
-		<button @click="$emit('toHome')">ADD CARD</button>
 	</main>
 </template>
 
@@ -88,24 +88,48 @@
 export default {
 	data() {
 		return {
+			cardColor: "",
 			card: {
 				vendor: "",
 				cardNumber: "",
 				cardHolder: "",
 				expireMonth: "",
 				expireYear: "",
-				CCV: 212,
+				CCV: 212, //random 3 numbers function
 				active: false,
 			},
 		};
+	},
+	methods: {
+		changeCardColor() {
+			switch (this.card.vendor) {
+				case "bitcoin":
+					this.cardColor = "yellow";
+          break;
+				case "blockchain":
+          this.cardColor = "purple";
+          break;
+				case "evil":
+					this.cardColor = "red";
+          break;
+				case "ninja":
+					this.cardColor = "grey";
+          break;
+				default:
+					this.cardColor = "black";
+			}
+		},
+    submitCard(){
+      console.log("yo");
+      this.$emit("card", {...this.card})
+    }
 	},
 };
 </script>
 
 <style lang="scss" scoped>
-
 .vendor-placeholder {
-  height: 4rem;
+	height: 4rem;
 }
 main {
 	display: flex;
@@ -140,7 +164,8 @@ div input {
 }
 
 input,
-.vendor-container select, .year-container select,
+.vendor-container select,
+.year-container select,
 .month-container select {
 	height: 2rem;
 }
@@ -184,7 +209,7 @@ button {
 }
 
 .card-number {
-  height: 3rem;
+	height: 3rem;
 	margin: 0.5rem;
 	padding: 0;
 	font-size: 3rem;
