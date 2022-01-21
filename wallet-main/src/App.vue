@@ -30,7 +30,7 @@ export default {
 				},
 				{
 					vendor: "Evil Corp",
-					cardNumber: "123521233 123",
+					cardNumber: "1233 5212 2331 1234",
 					cardHolder: "mr Bbruh",
 					expireMonth: "02",
 					expireYear: 23,
@@ -49,7 +49,7 @@ export default {
 				{
 					vendor: "Blockchain Inc",
 					cardNumber: "1235212125s333 123",
-					cardHolder: "mr Babruh",
+					cardHolder: "DAVID LUNDHOLM",
 					expireMonth: "02",
 					expireYear: 23,
 					CCV: 212,

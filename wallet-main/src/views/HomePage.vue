@@ -4,7 +4,7 @@
 		<h5>ACTIVE CARD</h5>
 		<h5>{{checkIfActives}}</h5>
 		<CardList :cards="cards" @toggleActive="toggleActive" />
-		<button>ADD NEW CARD</button>
+		<button>ADD A NEW CARD</button>
 	</main>
 </template>
 
@@ -56,12 +56,16 @@ main {
 	h1{
 		margin-top: 2rem;
 	}
-
-	
 }
 
 button {
-	margin: 1rem;
+	cursor: pointer;
+	margin-top: 2%;
 	position: relative;
+	height: 4rem;
+	width: 35rem;
+	font-size: 1.6rem;
+	border-radius: .5rem;
+	background: none;
 }
 </style>
