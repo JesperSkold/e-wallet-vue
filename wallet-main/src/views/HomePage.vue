@@ -4,7 +4,7 @@
 		<h5>ACTIVE CARD</h5>
 		<h5>{{checkIfActives}}</h5>
 		<CardList :cards="cards" @toggleActive="toggleActive" />
-		<button>ADD A NEW CARD</button>
+		<button @click="$emit('changeView')">ADD A NEW CARD</button>
 	</main>
 </template>
 
@@ -53,8 +53,11 @@ main {
 		margin: 0;
 		padding: 0;
 	}
+	h5 {
+		margin-bottom: .2rem;
+	}
 	h1{
-		margin-top: 2rem;
+		margin: 2rem 0;
 	}
 }
 

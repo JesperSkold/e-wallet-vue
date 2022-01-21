@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" />
+		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'"/>
 		<AddCardPage v-else />
 	</div>
 </template>

@@ -72,6 +72,7 @@ $maxCards: 50;
 // }
 
 li {
+	color: white;
 	border: 1px black solid;
 	width: 35rem;
 	list-style: none;
@@ -110,6 +111,7 @@ li {
 	padding: 0;
 	font-size: 3rem;
 	text-align: center;
+	letter-spacing: 0.3rem;
 }
 
 .card-holder p {
