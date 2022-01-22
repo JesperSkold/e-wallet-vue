@@ -72,7 +72,16 @@
 
 			<div class="vendor-container">
 				<label for="vendor">VENDOR</label>
-				<select name="vendor" id="vendor" v-model="card.vendor" @change="changeCardColor(); lol($event);" required>
+				<select
+					name="vendor"
+					id="vendor"
+					v-model="card.vendor"
+					@change="
+						changeCardColor();
+						lol($event);
+					"
+					required
+				>
 					<option value="" disabled selected hidden></option>
 					<option value="bitcoin">Bitcoin Inc</option>
 					<option value="blockchain">Blockchain Inc</option>
@@ -131,7 +140,7 @@ export default {
 			this.$emit("card", { ...this.card });
 		},
 		validateForm() {
-			// this.errors = [];
+			this.errors = [];
 			if (this.card.cardNumber === "") {
 				this.errors.push("You must fill out your card number!");
 			} else if (this.card.cardNumber.match(/\s+/g)) {
@@ -161,28 +170,28 @@ export default {
 			if (this.card.vendor === "") {
 				this.errors.push("Select a vendor");
 			}
-			
+
 			if (!this.errors.length) {
 				this.filledOutForm = true;
 				this.$emit("toHome");
 				this.submitCard();
 			}
 		},
-			lol(event) {
-				console.log(event.target);
-				for (const error of this.errors) {
-					if (error.includes(event.target.id)) {
-						this.errors.splice(this.errors.indexOf(error), 1)
-						console.log(this.errors);
-					}
+		lol(event) {
+			console.log(event.target);
+			for (const error of this.errors) {
+				if (error.includes(event.target.id)) {
+					this.errors.splice(this.errors.indexOf(error), 1);
+					console.log(this.errors);
 				}
-				// console.log(this.errors);
-				// console.log(event.target.id);
-				// console.log(this.errors[3].includes(event.target.id));
-				// console.log(typeof event.target.name);
-				// console.log(this.errors.includes(event.target.id));
-				// console.log(this.errors.includes(event.target.name).filter(x => x === event.target.name))
-				// console.log(this.errors);
+			}
+			// console.log(this.errors);
+			// console.log(event.target.id);
+			// console.log(this.errors[3].includes(event.target.id));
+			// console.log(typeof event.target.name);
+			// console.log(this.errors.includes(event.target.id));
+			// console.log(this.errors.includes(event.target.name).filter(x => x === event.target.name))
+			// console.log(this.errors);
 			// console.log(event.target);
 		},
 	},
