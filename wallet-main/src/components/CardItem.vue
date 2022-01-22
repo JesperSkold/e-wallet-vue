@@ -1,5 +1,5 @@
 <template>
-	<div @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex">
+	<div @click="$emit('activeCard', index)" :style="{ background: cardColor, color: textColor }" :class="layerIndex">
 		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 		<div class="chip-signal-box">
 			<img src="../assets/wifi.svg" alt="" class="signal" />
@@ -29,7 +29,7 @@ export default {
 	data() {
 		return {
 			isActive: false,
-			activeColor: "",
+			textColor: "",
 			cardColor: "",
 		};
 	},
@@ -44,16 +44,20 @@ export default {
 	mounted() {
 		switch (this.card.vendor) {
 			case "bitcoin":
-				this.cardColor = "yellow";
+				this.cardColor = "#FFB84D";
+				this.textColor = "black" 
 				break;
 			case "blockchain":
-				this.cardColor = "purple";
+				this.cardColor = "#8B58F9";
+				this.textColor = "white" 
 				break;
 			case "evil":
-				this.cardColor = "red";
+				this.cardColor = "#F33355";
+				this.textColor = "white" 
 				break;
 			case "ninja":
-				this.cardColor = "grey";
+				this.cardColor = "#222222";
+				this.textColor = "white" 
 				break;
 			default:
 				this.cardColor = "grey";
@@ -74,11 +78,10 @@ $maxCards: 100;
 	}
 }
 
-.layer {
+.layer, .active {
 	color: white;
 	border: 1px black solid;
 	width: 35rem;
-	list-style: none;
 	left: 0;
 	right: 0;
 	margin-left: auto;

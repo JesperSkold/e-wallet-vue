@@ -2,7 +2,7 @@
 	<main>
 		<h1>ADD NEW CARD</h1>
 		<h5>NEW CARD</h5>
-		<div class="card" :style="{ background: cardColor }">
+		<div class="card" :style="{ background: cardColor, color: textColor }">
 			<div class="vendor-placeholder">
 				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 			</div>
@@ -105,6 +105,7 @@ export default {
 			errors: [],
 			filledOutForm: false,
 			cardColor: "",
+			textColor: "",
 			card: {
 				vendor: "",
 				cardNumber: "",
@@ -131,19 +132,23 @@ export default {
 		changeCardColor() {
 			switch (this.card.vendor) {
 				case "bitcoin":
-					this.cardColor = "yellow";
+					this.cardColor = "#FFB84D";
+					this.textColor = "black" 
 					break;
 				case "blockchain":
-					this.cardColor = "purple";
+					this.cardColor = "#8B58F9";
+					this.textColor = "white"
 					break;
 				case "evil":
-					this.cardColor = "red";
+					this.cardColor = "#F33355";
+					this.textColor = "white"
 					break;
 				case "ninja":
-					this.cardColor = "grey";
+					this.cardColor = "#222222";
+					this.textColor = "white"
 					break;
 				default:
-					this.cardColor = "black";
+					this.cardColor = "grey";
 			}
 		},
 		submitCard() {
@@ -196,14 +201,6 @@ export default {
 					console.log(this.errors);
 				}
 			}
-			// console.log(this.errors);
-			// console.log(event.target.id);
-			// console.log(this.errors[3].includes(event.target.id));
-			// console.log(typeof event.target.name);
-			// console.log(this.errors.includes(event.target.id));
-			// console.log(this.errors.includes(event.target.name).filter(x => x === event.target.name))
-			// console.log(this.errors);
-			// console.log(event.target);
 		},
 	},
 };
