@@ -26,20 +26,20 @@
 
 		<form @submit.prevent="submitCard">
 			<div>
-				<label for="">CARD NUMBER</label>
-				<input type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="errors = []" />
+				<label for="cardNumber">CARD NUMBER</label>
+				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="lol" required />
 			</div>
 			<div>
-				<label for="">CARDHOLDER NAME</label>
-				<input type="text" placeholder="FirstName LastName" v-model="card.cardHolder" required @focus="errors = []" />
+				<label for="fullName">CARDHOLDER NAME</label>
+				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" required @focus="lol" />
 			</div>
 
 			<div class="month-year">
 				<div class="month-container">
-					<label for="">MONTH</label>
+					<label for="months">MONTH</label>
 					<!-- 12-->
 					<!-- <input type="number" /> -->
-					<select name="" id="" v-model="card.expireMonth" required>
+					<select name="months" id="month" v-model="card.expireMonth" required @change="lol">
 						<option value="" disabled selected hidden></option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -56,10 +56,10 @@
 					</select>
 				</div>
 				<div class="year-container">
-					<label for="">YEAR</label>
+					<label for="years">YEAR</label>
 					<!-- 21-25-->
 					<!-- <input type="number" /> -->
-					<select name="" id="" v-model="card.expireYear" required>
+					<select name="years" id="year" v-model="card.expireYear" @change="lol" required>
 						<option value="" disabled selected hidden></option>
 						<option value="22">22</option>
 						<option value="23">23</option>
@@ -71,8 +71,8 @@
 			</div>
 
 			<div class="vendor-container">
-				<label for="">VENDOR</label>
-				<select select name="" id="" v-model="card.vendor" @change="changeCardColor" required>
+				<label for="vendor">VENDOR</label>
+				<select name="vendor" id="vendor" v-model="card.vendor" @change="changeCardColor(); lol($event);" required>
 					<option value="" disabled selected hidden></option>
 					<option value="bitcoin">Bitcoin Inc</option>
 					<option value="blockchain">Blockchain Inc</option>
@@ -131,16 +131,15 @@ export default {
 			this.$emit("card", { ...this.card });
 		},
 		validateForm() {
-			this.errors = [];
+			// this.errors = [];
 			if (this.card.cardNumber === "") {
-				console.log(this.errors);
 				this.errors.push("You must fill out your card number!");
 			} else if (this.card.cardNumber.match(/\s+/g)) {
 				this.errors.push("Fill out your card without spaces!");
 			} else if (!this.card.cardNumber.match(/^\d+$/)) {
 				this.errors.push("You can only have numbers in your card number!");
-			}else if (this.card.cardNumber.length < 16 || this.card.cardNumber.length > 16){
-				this.errors.push("Your card number needs to be exactly 12 numbers!")
+			} else if (this.card.cardNumber.length < 16 || this.card.cardNumber.length > 16) {
+				this.errors.push("Your card number needs to be exactly 12 numbers!");
 			}
 
 			if (this.card.cardHolder === "") {
@@ -151,11 +150,40 @@ export default {
 				this.errors.push("I'm sorry if you have a long name, but it cant be more than twenty letters!");
 			}
 
+			if (this.card.expireMonth === "") {
+				this.errors.push("Select what month your card expires!");
+			}
+
+			if (this.card.expireYear === "") {
+				this.errors.push("Select what year your card expires!");
+			}
+
+			if (this.card.vendor === "") {
+				this.errors.push("Select a vendor");
+			}
+			
 			if (!this.errors.length) {
 				this.filledOutForm = true;
-					this.$emit('toHome');
-					this.submitCard();
+				this.$emit("toHome");
+				this.submitCard();
 			}
+		},
+			lol(event) {
+				console.log(event.target);
+				for (const error of this.errors) {
+					if (error.includes(event.target.id)) {
+						this.errors.splice(this.errors.indexOf(error), 1)
+						console.log(this.errors);
+					}
+				}
+				// console.log(this.errors);
+				// console.log(event.target.id);
+				// console.log(this.errors[3].includes(event.target.id));
+				// console.log(typeof event.target.name);
+				// console.log(this.errors.includes(event.target.id));
+				// console.log(this.errors.includes(event.target.name).filter(x => x === event.target.name))
+				// console.log(this.errors);
+			// console.log(event.target);
 		},
 	},
 };
