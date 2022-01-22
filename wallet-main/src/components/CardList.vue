@@ -1,10 +1,10 @@
 <template>
-	<div class="lol">
-		<ul v-for="(card, i) in cards" :key="card.cardNumber" >
+	<section>
+		<div v-for="(card, i) in cards" :key="card.cardNumber" class="card-container" >
 			<CardItem v-if="card.active" :card="card" class="active" />
 			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer' + ' l-' + i" :index="i"/>
-		</ul>
-	</div>
+		</div>
+	</section>
 </template>
 
 <script>
@@ -25,35 +25,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.lol{
+section{
   min-height: 30vh;
 	margin: 0;
 	padding: 0;
 	position: relative;
-//  .spacer {
-//    height: 20rem;
-//    width: 100%;
-//  }
-  ul{
+
+  .card-container{
     min-width: 95vw;
     margin: 0;
     padding: 0;
   }
 }
 
-
-
-// .activeContainer {
-//   height: 80vh;
-// }
-// .spacer-container{
-//   display: flex;
-//  flex-flow: column;
-//   height: 100rem;
-// }
-// .spacer{
-//   flex: 1;
-//   margin: 5rem;
-// }
+.active {
+	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+	box-shadow: 0px 0px 105px 15px rgba(255, 213, 46, 0.9);
+}
 
 </style>

@@ -1,12 +1,11 @@
 <template>
-	<!-- <li @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex"> -->
-	<li @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex">
+	<div @click="$emit('activeCard', index)" :style="{ background: cardColor }" :class="layerIndex">
 		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 		<div class="chip-signal-box">
 			<img src="../assets/wifi.svg" alt="" class="signal" />
 			<img src="../assets/chip.svg" alt="" class="chip" />
 		</div>
-		<p class="card-number">{{ card.cardNumber }}</p>
+		<p class="card-number">{{ numberFormatting }}</p>
 		<div class="bottom-text">
 			<div class="card-holder">
 				<p class="name">CARDHOLDER NAME</p>
@@ -17,7 +16,7 @@
 				<p class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
 			</div>
 		</div>
-	</li>
+	</div>
 </template>
 
 <script>
@@ -30,8 +29,17 @@ export default {
 	data() {
 		return {
 			isActive: false,
+			activeColor: "",
 			cardColor: "",
 		};
+	},
+	computed: {
+		numberFormatting() {
+			if (this.card.cardNumber) {
+				return this.card.cardNumber.match(/.{1,4}/g).join(" ");
+			}
+			return "";
+		},
 	},
 	mounted() {
 		switch (this.card.vendor) {
@@ -66,12 +74,7 @@ $maxCards: 100;
 	}
 }
 
-// .l-14 {
-//   margin-top: 40rem;
-//   position: static;
-// }
-
-li {
+.layer {
 	color: white;
 	border: 1px black solid;
 	width: 35rem;
@@ -81,12 +84,6 @@ li {
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 1rem;
-}
-
-.active {
-	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-	box-shadow: 0px 0px 105px 15px rgba(255, 213, 46, 0.9);
 }
 
 .vendor {

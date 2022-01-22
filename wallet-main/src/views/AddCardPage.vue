@@ -10,7 +10,7 @@
 				<img src="../assets/wifi.svg" alt="" class="signal" />
 				<img src="../assets/chip.svg" alt="" class="chip" />
 			</div>
-			<p class="card-number">{{ mask }}</p>
+			<p class="card-number">{{ numberFormatting }}</p>
 			<div class="bottom-text">
 				<div class="card-holder">
 					<p class="name">CARDHOLDER NAME</p>
@@ -27,11 +27,11 @@
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
-				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="lol" maxlength="16" required />
+				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="removeSingleError" maxlength="16" required />
 			</div>
 			<div>
 				<label for="fullName">CARDHOLDER NAME</label>
-				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="41" required @focus="lol" />
+				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="41" required @focus="removeSingleError" />
 			</div>
 
 			<div class="month-year">
@@ -39,7 +39,7 @@
 					<label for="months">MONTH</label>
 					<!-- 12-->
 					<!-- <input type="number" /> -->
-					<select name="months" id="month" v-model="card.expireMonth" required @change="lol">
+					<select name="months" id="month" v-model="card.expireMonth" required @change="removeSingleError">
 						<option value="" disabled selected hidden></option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -59,7 +59,7 @@
 					<label for="years">YEAR</label>
 					<!-- 21-25-->
 					<!-- <input type="number" /> -->
-					<select name="years" id="year" v-model="card.expireYear" @change="lol" required>
+					<select name="years" id="year" v-model="card.expireYear" @change="removeSingleError" required>
 						<option value="" disabled selected hidden></option>
 						<option value="22">22</option>
 						<option value="23">23</option>
@@ -78,7 +78,7 @@
 					v-model="card.vendor"
 					@change="
 						changeCardColor();
-						lol($event);
+						removeSingleError($event);
 					"
 					required
 				>
@@ -117,7 +117,7 @@ export default {
 		};
 	},
 	computed: {
-		mask() {
+		numberFormatting() {
 			if (this.card.cardNumber) {
 				return this.card.cardNumber.match(/.{1,4}/g).join(" ");
 			}
@@ -188,7 +188,7 @@ export default {
 				this.submitCard();
 			}
 		},
-		lol(event) {
+		removeSingleError(event) {
 			console.log(event.target);
 			for (const error of this.errors) {
 				if (error.includes(event.target.id)) {
