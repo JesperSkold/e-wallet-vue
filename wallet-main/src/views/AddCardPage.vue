@@ -27,11 +27,11 @@
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
-				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="lol" required />
+				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="lol" maxlength="16" required />
 			</div>
 			<div>
 				<label for="fullName">CARDHOLDER NAME</label>
-				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" required @focus="lol" />
+				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="41" required @focus="lol" />
 			</div>
 
 			<div class="month-year">
@@ -111,12 +111,15 @@ export default {
 				cardHolder: "",
 				expireMonth: "",
 				expireYear: "",
-				CCV: 212, //random 3 numbers function
+				CCV: this.randomCvv(), //random 3 numbers function
 				active: false,
 			},
 		};
 	},
 	methods: {
+		randomCvv(){
+			return String(Math.floor(Math.random()*3)+1) + String(Math.floor(Math.random()*3)+1) + String(Math.floor(Math.random()*3)+1)
+		},
 		changeCardColor() {
 			switch (this.card.vendor) {
 				case "bitcoin":
@@ -156,7 +159,7 @@ export default {
 			} else if (this.card.cardNumber.match(/^[A-Za-z]+$/)) {
 				this.errors.push("You cant have numbers in your name!");
 			} else if (this.card.cardHolder.length > 40) {
-				this.errors.push("I'm sorry if you have a long name, but it cant be more than twenty letters!");
+				this.errors.push("I'm sorry if you have a long name, but it cant be more than 40 letters!");
 			}
 
 			if (this.card.expireMonth === "") {
