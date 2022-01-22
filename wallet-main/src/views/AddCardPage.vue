@@ -111,14 +111,14 @@ export default {
 				cardHolder: "",
 				expireMonth: "",
 				expireYear: "",
-				CCV: this.randomCvv(), //random 3 numbers function
+				CCV: this.randomCvv(),
 				active: false,
 			},
 		};
 	},
 	methods: {
 		randomCvv(){
-			return String(Math.floor(Math.random()*3)+1) + String(Math.floor(Math.random()*3)+1) + String(Math.floor(Math.random()*3)+1)
+			return String(Math.floor(Math.random()*4)) + String(Math.floor(Math.random()*4)) + String(Math.floor(Math.random()*4))
 		},
 		changeCardColor() {
 			switch (this.card.vendor) {
@@ -226,9 +226,6 @@ div input {
 	display: flex;
 }
 
-.year-container,
-.month-container {
-}
 .month-container {
 	margin: 0 2rem 0 0;
 }
