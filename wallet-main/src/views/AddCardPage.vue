@@ -7,7 +7,8 @@
 				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 			</div>
 			<div class="chip-signal-box">
-				<img src="../assets/wifi.svg" alt="" class="signal" />
+				<img v-if="card.vendor==='bitcoin' || card.vendor==='ninja'" src="../assets/wifi_white.svg" alt="" class="signal">
+				<img v-else src="../assets/wifi.svg" alt="" class="signal"/>
 				<img src="../assets/chip.svg" alt="" class="chip" />
 			</div>
 			<p class="card-number">{{ numberFormatting }}</p>
@@ -169,7 +170,7 @@ export default {
 
 			if (this.card.cardHolder === "") {
 				this.errors.push("You must fill out your name!");
-			} else if (this.card.cardNumber.match(/^\d+$/)) {
+			} else if (this.card.cardHolder.match(/\d+/g)) {
 				this.errors.push("You cant have numbers in your name!");
 			} else if (this.card.cardHolder.length > 40) {
 				this.errors.push("I'm sorry if you have a long name, but it cant be more than 40 letters!");
@@ -184,7 +185,8 @@ export default {
 			}
 
 			if (this.card.vendor === "") {
-				this.errors.push("Select a vendor");
+				console.log("pushed vendor");
+				this.errors.push("Select a vendor!");
 			}
 
 			if (!this.errors.length) {
@@ -194,7 +196,6 @@ export default {
 			}
 		},
 		removeSingleError(event) {
-			console.log(event.target);
 			for (const error of this.errors) {
 				if (error.includes(event.target.id)) {
 					this.errors.splice(this.errors.indexOf(error), 1);

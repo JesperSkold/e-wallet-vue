@@ -2,7 +2,8 @@
 	<div @click="$emit('activeCard', index)" :style="{ background: cardColor, color: textColor }" :class="layerIndex">
 		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 		<div class="chip-signal-box">
-			<img src="../assets/wifi.svg" alt="" class="signal" />
+			<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" />
+			<img v-else src="../assets/wifi.svg" alt="" class="signal" />
 			<img src="../assets/chip.svg" alt="" class="chip" />
 		</div>
 		<p class="card-number">{{ numberFormatting }}</p>
@@ -45,19 +46,19 @@ export default {
 		switch (this.card.vendor) {
 			case "bitcoin":
 				this.cardColor = "#FFB84D";
-				this.textColor = "black" 
+				this.textColor = "black";
 				break;
 			case "blockchain":
 				this.cardColor = "#8B58F9";
-				this.textColor = "white" 
+				this.textColor = "white";
 				break;
 			case "evil":
 				this.cardColor = "#F33355";
-				this.textColor = "white" 
+				this.textColor = "white";
 				break;
 			case "ninja":
 				this.cardColor = "#222222";
-				this.textColor = "white" 
+				this.textColor = "white";
 				break;
 			default:
 				this.cardColor = "grey";
@@ -78,7 +79,8 @@ $maxCards: 100;
 	}
 }
 
-.layer, .active {
+.layer,
+.active {
 	color: white;
 	border: 1px black solid;
 	width: 35rem;
