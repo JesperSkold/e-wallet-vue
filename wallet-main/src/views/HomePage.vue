@@ -3,6 +3,7 @@
 		<h1>E-WALLET</h1>
 		<h5>ACTIVE CARD</h5>
 		<h5>{{checkIfActives}}</h5>
+		<h5>{{checkIfCards}}</h5>
 		<CardList :cards="cards" @toggleActive="toggleActive" />
 		<button @click="$emit('changeView')">ADD A NEW CARD</button>
 	</main>
@@ -17,11 +18,6 @@ export default {
 	props: {
 		cards: Array,
 	},
-	data() {
-		return {
-			checkIfActive: null,
-		};
-	},
 	methods: {
 		toggleActive(index) {
 			this.$emit("toggleActive", index);
@@ -35,6 +31,12 @@ export default {
         }
       }
   return "You dont have an active card yet, pick a card to activate it!"
+},
+checkIfCards(){
+	if (this.cards.length) {
+		return ""
+	}
+	return "You dont have any cards yet, click the add new card button to add cards."
 }
 	},
 };

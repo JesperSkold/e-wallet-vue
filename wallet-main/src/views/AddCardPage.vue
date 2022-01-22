@@ -7,8 +7,8 @@
 				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 			</div>
 			<div class="chip-signal-box">
-				<img v-if="card.vendor==='bitcoin' || card.vendor==='ninja'" src="../assets/wifi_white.svg" alt="" class="signal">
-				<img v-else src="../assets/wifi.svg" alt="" class="signal"/>
+				<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" />
+				<img v-else src="../assets/wifi.svg" alt="" class="signal" />
 				<img src="../assets/chip.svg" alt="" class="chip" />
 			</div>
 			<p class="card-number">{{ numberFormatting }}</p>
@@ -134,19 +134,19 @@ export default {
 			switch (this.card.vendor) {
 				case "bitcoin":
 					this.cardColor = "#FFB84D";
-					this.textColor = "black" 
+					this.textColor = "black";
 					break;
 				case "blockchain":
 					this.cardColor = "#8B58F9";
-					this.textColor = "white"
+					this.textColor = "white";
 					break;
 				case "evil":
 					this.cardColor = "#F33355";
-					this.textColor = "white"
+					this.textColor = "white";
 					break;
 				case "ninja":
 					this.cardColor = "#222222";
-					this.textColor = "white"
+					this.textColor = "white";
 					break;
 				default:
 					this.cardColor = "grey";
@@ -172,6 +172,8 @@ export default {
 				this.errors.push("You must fill out your name!");
 			} else if (this.card.cardHolder.match(/\d+/g)) {
 				this.errors.push("You cant have numbers in your name!");
+			} else if (this.card.cardHolder.length < 4) {
+				this.errors.push("Your name must be longer than 3 letters, sorry!");
 			} else if (this.card.cardHolder.length > 40) {
 				this.errors.push("I'm sorry if you have a long name, but it cant be more than 40 letters!");
 			}
