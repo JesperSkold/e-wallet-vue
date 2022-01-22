@@ -10,7 +10,7 @@
 				<img src="../assets/wifi.svg" alt="" class="signal" />
 				<img src="../assets/chip.svg" alt="" class="chip" />
 			</div>
-			<p class="card-number">{{ card.cardNumber }}</p>
+			<p class="card-number">{{ mask }}</p>
 			<div class="bottom-text">
 				<div class="card-holder">
 					<p class="name">CARDHOLDER NAME</p>
@@ -116,9 +116,17 @@ export default {
 			},
 		};
 	},
+	computed: {
+		mask() {
+			if (this.card.cardNumber) {
+				return this.card.cardNumber.match(/.{1,4}/g).join(" ");
+			}
+			return "";
+		},
+	},
 	methods: {
-		randomCvv(){
-			return String(Math.floor(Math.random()*4)) + String(Math.floor(Math.random()*4)) + String(Math.floor(Math.random()*4))
+		randomCvv() {
+			return String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4));
 		},
 		changeCardColor() {
 			switch (this.card.vendor) {
