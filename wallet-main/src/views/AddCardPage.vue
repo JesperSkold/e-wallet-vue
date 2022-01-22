@@ -254,7 +254,7 @@ form > div {
 
 button {
 	cursor: pointer;
-	margin-top: 2rem;
+	margin: 2rem 0;
 	background: none;
 	font-size: 1.6rem;
 	font-weight: 700;
@@ -271,7 +271,7 @@ button {
 	border-radius: 1rem;
 	height: 21.8rem;
 	width: 35rem;
-	background: grey;
+	background: #D0D0D0;
 	margin-bottom: 2rem;
 }
 .vendor {
@@ -296,7 +296,6 @@ button {
 	padding: 0;
 	font-size: 3rem;
 	text-align: center;
-	letter-spacing: 0.3rem;
 }
 
 .card-holder p {

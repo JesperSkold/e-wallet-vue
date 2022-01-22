@@ -69,7 +69,7 @@ export default {
 
 <style lang="scss" scoped>
 // $step: 7rem;
-$maxCards: 100;
+$maxCards: 50;
 @for $i from 0 through $maxCards {
 	.l-#{$i} {
 		position: absolute;
@@ -113,7 +113,6 @@ $maxCards: 100;
 	padding: 0;
 	font-size: 3rem;
 	text-align: center;
-	letter-spacing: 0.3rem;
 }
 
 .card-holder p {
