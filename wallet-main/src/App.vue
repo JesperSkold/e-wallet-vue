@@ -38,8 +38,9 @@ export default {
 			localStorage.setItem("cards", JSON.stringify(this.cards));
 		},
 			deleteEcho(index){
+				console.log(index);
 			this.cards.splice(index, 1)
-			localStorage.setItem("cards", JSON.stringify(this.cards));
+			// localStorage.setItem("cards", JSON.stringify(this.cards));
 		}
 	},
 	created(){

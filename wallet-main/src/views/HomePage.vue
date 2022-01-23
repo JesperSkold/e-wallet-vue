@@ -4,7 +4,15 @@
 		<h5>ACTIVE CARD</h5>
 		<h5>{{ checkIfActives }}</h5>
 		<h5>{{ checkIfCards }}</h5>
-		<CardList :cards="cards" @toggleActive="toggleActive" @delete="deleteEcho"/>
+		<CardList :cards="cards" @toggleActive="toggleActive" @delete="saveIndex" />
+		<div class="fade-layer" v-if="showModal"></div>
+		<div class="modal" v-if="showModal">
+			<p>Are you sure you want to remove this card?</p>
+			<div class="btn-container">
+				<button @click="$emit('delete', deleteIndex);showModal = false">YES</button>
+				<button @click="showModal = false">NO</button>
+			</div>
+		</div>
 		<button @click="$emit('changeView')">ADD A NEW CARD</button>
 	</main>
 </template>
@@ -15,6 +23,12 @@ export default {
 	components: {
 		CardList,
 	},
+	data() {
+		return {
+			showModal: false,
+			deleteIndex: null,
+		};
+	},
 	props: {
 		cards: Array,
 	},
@@ -22,9 +36,11 @@ export default {
 		toggleActive(index) {
 			this.$emit("toggleActive", index);
 		},
-			deleteEcho(index){
-			this.$emit("delete", index)
-		}
+		saveIndex(index) {
+			this.deleteIndex = index;
+			this.showModal = true;
+			console.log(index);
+		},
 	},
 	computed: {
 		checkIfActives() {
@@ -46,6 +62,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.modal {
+	position: fixed;
+	box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+-webkit-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+-moz-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+	border-radius: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background: rgb(243, 239, 239);
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	width: 30rem;
+	height: 15rem;
+	z-index: 999;
+}
+.fade-layer {
+	z-index: 998;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(128, 128, 128, 0.301);
+}
 main {
 	margin: 0;
 	padding: 0;
@@ -67,7 +112,14 @@ main {
 	}
 }
 
-button {
+div > button {
+	cursor: pointer;
+	margin: 0 1rem;
+	width: 5rem;
+	height: 2rem;
+}
+
+main > button {
 	cursor: pointer;
 	margin-top: 2%;
 	position: relative;

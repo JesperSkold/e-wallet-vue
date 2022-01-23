@@ -291,6 +291,7 @@ button {
 }
 
 .card {
+	border: 1px black solid;
 	overflow: hidden;
 	border-radius: 1rem;
 	height: 21.8rem;

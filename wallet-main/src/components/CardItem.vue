@@ -152,5 +152,8 @@ $maxCards: 50;
 	position: absolute;
 	margin-left: 37rem;
 	top: 3rem;
+	&:hover{
+		opacity: 0.7;
+	}
 }
 </style>
