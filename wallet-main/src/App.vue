@@ -1,7 +1,9 @@
 <template>
 	<div id="app">
+		<keep-alive>
 		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'"/>
 		<AddCardPage v-else @toHome="currentView ='home'" @card="saveCard" @goBack="currentView ='home'"/>
+		</keep-alive>
 	</div>
 </template>
 
@@ -61,6 +63,7 @@ export default {
 	methods: {
 		saveCard(card){
 			this.cards.push(card)
+			localStorage.setItem("cards", JSON.stringify(this.cards));
 		},
 		toggleActive(index) {
 			for (const elem of this.cards) {
@@ -69,8 +72,14 @@ export default {
 				}
 			}
 			this.cards[index].active = !this.cards[index].active;
+			localStorage.setItem("cards", JSON.stringify(this.cards));
 		},
 	},
+	created(){
+		if (localStorage.cards) {
+					this.cards = JSON.parse(localStorage.getItem("cards"));
+				}
+	}
 };
 </script>
 
