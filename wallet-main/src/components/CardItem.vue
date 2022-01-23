@@ -149,6 +149,7 @@ $maxCards: 50;
 
 .delete {
 	width: 3rem;
+	cursor: pointer;
 	position: absolute;
 	margin-left: 37rem;
 	top: 3rem;

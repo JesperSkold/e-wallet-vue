@@ -1,7 +1,7 @@
 <template>
 	<section>
 		<div v-for="(card, i) in cards" :key="card.cardNumber" class="card-container" >
-			<CardItem v-if="card.active" :card="card" class="active" @delete="deleteEcho"/>
+			<CardItem v-if="card.active" :card="card" class="active" @delete="deleteEcho" :index="i"/>
 			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer' + ' l-' + i" :index="i" @delete="deleteEcho"/>
 		</div>
 	</section>
