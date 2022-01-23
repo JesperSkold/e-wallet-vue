@@ -1,6 +1,7 @@
 <template>
 	<main>
-		<h1>E-WALLET</h1>
+		<!-- <a href="top"></a> -->
+		<h1 id="pagetop">E-WALLET</h1>
 		<h5>ACTIVE CARD</h5>
 		<h5>{{ checkIfActives }}</h5>
 		<h5>{{ checkIfCards }}</h5>
@@ -9,11 +10,19 @@
 		<div class="modal" v-if="showModal">
 			<p>Are you sure you want to remove this card?</p>
 			<div class="btn-container">
-				<button @click="$emit('delete', deleteIndex);showModal = false">YES</button>
+				<button
+					@click="
+						$emit('delete', deleteIndex);
+						showModal = false;
+					"
+				>
+					YES
+				</button>
 				<button @click="showModal = false">NO</button>
 			</div>
 		</div>
-		<button @click="$emit('changeView')">ADD A NEW CARD</button>
+		<button class="add-btn" @click="$emit('changeView')">ADD A NEW CARD</button>
+		<img class="top" src="../assets/up.svg" alt="" @click="toTop" v-if="scY > 250"/>
 	</main>
 </template>
 
@@ -25,6 +34,8 @@ export default {
 	},
 	data() {
 		return {
+			scTimer: 0, //to top
+			scY: 0, //to top
 			showModal: false,
 			deleteIndex: null,
 		};
@@ -40,6 +51,20 @@ export default {
 			this.deleteIndex = index;
 			this.showModal = true;
 			console.log(index);
+		},
+		handleScroll: function () { //to top
+			if (this.scTimer) return;
+			this.scTimer = setTimeout(() => {
+				this.scY = window.scrollY;
+				clearTimeout(this.scTimer);
+				this.scTimer = 0;
+			}, 100);
+		},
+		toTop: function () {
+			window.scrollTo({
+				top: 0,
+				behavior: "smooth",
+			});
 		},
 	},
 	computed: {
@@ -58,15 +83,18 @@ export default {
 			return "You dont have any cards yet, click the add new card button to add cards.";
 		},
 	},
+	mounted() { //to top
+		window.addEventListener("scroll", this.handleScroll);
+	},
 };
 </script>
 
 <style lang="scss" scoped>
 .modal {
 	position: fixed;
-	box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
--webkit-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
--moz-box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
+	box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+	-webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
 	border-radius: 1rem;
 	display: flex;
 	align-items: center;
@@ -112,15 +140,16 @@ main {
 	}
 }
 
-div > button {
+button {
 	cursor: pointer;
+}
+.btn-container button {
 	margin: 0 1rem;
 	width: 5rem;
 	height: 2rem;
 }
 
-main > button {
-	cursor: pointer;
+.add-btn {
 	margin-top: 2%;
 	position: relative;
 	height: 4rem;
@@ -131,6 +160,16 @@ main > button {
 	&:hover {
 		color: white;
 		background: black;
+	}
+}
+.top {
+	width: 5rem;
+	margin-left: 25rem;
+	bottom: 1%;
+	cursor: pointer;
+	position: fixed;
+	&:hover {
+		opacity: 0.5;
 	}
 }
 </style>
