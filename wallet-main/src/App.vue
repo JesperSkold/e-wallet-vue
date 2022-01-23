@@ -2,7 +2,7 @@
 	<div id="app">
 		<keep-alive>
 		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'"/>
-		<AddCardPage v-else @toHome="currentView ='home'" @card="saveCard" @goBack="currentView ='home'"/>
+		<AddCardPage v-else @toHome="currentView ='home'" @card="saveCard" @goBack="currentView ='home'" :cards="cards"/>
 		</keep-alive>
 	</div>
 </template>
@@ -20,44 +20,7 @@ export default {
 	data() {
 		return {
 			currentView: "home",
-			cards: [
-				// {
-				// 	vendor: "Bitcoin Inc",
-				// 	cardNumber: "123523 123",
-				// 	cardHolder: "mr Bruh",
-				// 	expireMonth: "02",
-				// 	expireYear: 23,
-				// 	CCV: 212,
-				// 	active: false,
-				// },
-				// {
-				// 	vendor: "Evil Corp",
-				// 	cardNumber: "1233 5212 2331 1234",
-				// 	cardHolder: "mr Bbruh",
-				// 	expireMonth: "02",
-				// 	expireYear: 23,
-				// 	CCV: 212,
-				// 	active: false,
-				// },
-				// {
-				// 	vendor: "Ninja Bank",
-				// 	cardNumber: "123521212333 123",
-				// 	cardHolder: "mr Babruh",
-				// 	expireMonth: "02",
-				// 	expireYear: 23,
-				// 	CCV: 212,
-				// 	active: false,
-				// },
-				// {
-				// 	vendor: "Blockchain Inc",
-				// 	cardNumber: "1235212125s333 123",
-				// 	cardHolder: "DAVID LUNDHOLM",
-				// 	expireMonth: "02",
-				// 	expireYear: 23,
-				// 	CCV: 212,
-				// 	active: false,
-				// },
-			],
+			cards: [],
 		};
 	},
 	methods: {

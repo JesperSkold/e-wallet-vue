@@ -25,6 +25,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
@@ -118,6 +119,9 @@ export default {
 			},
 		};
 	},
+	props: {
+		cards: Array
+	},
 	computed: {
 		numberFormatting() {
 			if (this.card.cardNumber) {
@@ -153,7 +157,6 @@ export default {
 			}
 		},
 		submitCard() {
-			console.log("yo");
 			this.$emit("card", { ...this.card });
 		},
 		validateForm() {
@@ -187,9 +190,10 @@ export default {
 			}
 
 			if (this.card.vendor === "") {
-				console.log("pushed vendor");
 				this.errors.push("Select a vendor!");
 			}
+
+			this.checkDupNum()
 
 			if (!this.errors.length) {
 				this.filledOutForm = true;
@@ -205,6 +209,13 @@ export default {
 				}
 			}
 		},
+		checkDupNum(){
+			for (const value of this.cards) {
+				if (this.card.cardNumber === value.cardNumber) {
+					this.errors.push("A card with this number already exists, choose another one!")
+				}
+			}
+		}
 	},
 };
 </script>
