@@ -2,8 +2,8 @@
 	<main>
 		<h1>E-WALLET</h1>
 		<h5>ACTIVE CARD</h5>
-		<h5>{{ checkIfCards }}</h5>
 		<h5>{{ checkIfActives }}</h5>
+		<h5>{{ checkIfCards }}</h5>
 		<CardList :cards="cards" @toggleActive="toggleActive" />
 		<button @click="$emit('changeView')">ADD A NEW CARD</button>
 	</main>

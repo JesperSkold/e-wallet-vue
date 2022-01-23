@@ -1,8 +1,8 @@
 <template>
 	<div id="app">
-		<keep-alive>
 		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'"/>
-		<AddCardPage v-else @toHome="currentView ='home'" @card="saveCard" @goBack="currentView ='home'" :cards="cards"/>
+		<keep-alive>
+		<AddCardPage v-if="currentView === 'AddCard'" @toHome="currentView ='home'" @card="saveCard" @goBack="currentView ='home'" :cards="cards"/>
 		</keep-alive>
 	</div>
 </template>

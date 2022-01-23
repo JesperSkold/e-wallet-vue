@@ -1,7 +1,7 @@
 <template>
 	<main>
 		<h1>ADD NEW CARD</h1>
-		<img class="go-back" src="../assets/go_back.svg" alt="go back btn" @click="$emit('goBack')">
+		<img class="go-back" src="../assets/go_back.svg" alt="go back btn" @click="$emit('goBack')" />
 		<h5>NEW CARD</h5>
 		<div class="card" :style="{ background: cardColor, color: textColor }">
 			<div class="vendor-placeholder">
@@ -25,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
@@ -199,6 +199,13 @@ export default {
 				this.filledOutForm = true;
 				this.$emit("toHome");
 				this.submitCard();
+				this.cardColor = "#d0d0d0", //resetting card render cuz of keep alive vvvvv
+				this.card.vendor = "",
+				this.card.cardNumber = "",
+				this.card.cardHolder = "",
+				this.card.expireMonth = "",
+				this.card.expireYear = "",
+				this.card.CCV = null
 			}
 		},
 		removeSingleError(event) {
@@ -212,7 +219,7 @@ export default {
 		checkDupNum(){
 			for (const value of this.cards) {
 				if (this.card.cardNumber === value.cardNumber) {
-					this.errors.push("A card with this number already exists, choose another one!")
+					this.errors.push("A card with this number already exists!")
 				}
 			}
 		}
@@ -240,11 +247,12 @@ div input {
 	width: 32rem;
 	display: block;
 }
-h1, h5 {
+h1,
+h5 {
 	margin: 0;
 }
-h5{
-	margin-bottom: .5rem;
+h5 {
+	margin-bottom: 0.5rem;
 }
 
 .month-year {
@@ -287,7 +295,7 @@ button {
 	border-radius: 1rem;
 	height: 21.8rem;
 	width: 35rem;
-	background: #D0D0D0;
+	background: #d0d0d0;
 	margin-bottom: 2rem;
 }
 .vendor {
@@ -345,7 +353,7 @@ button {
 	margin: 0;
 }
 
-.go-back{
+.go-back {
 	// position: absolute;
 	// right: 60%;
 	// bottom: 90%;
@@ -355,8 +363,8 @@ button {
 	color: white;
 	border-radius: 100%;
 	background: none;
-	&:hover{
-		background: #D0D0D0;
+	&:hover {
+		background: #d0d0d0;
 	}
 }
 </style>
