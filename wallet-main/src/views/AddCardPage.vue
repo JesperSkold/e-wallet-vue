@@ -29,11 +29,29 @@
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
-				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="removeSingleError" maxlength="16" required />
+				<input
+					name="cardNumber"
+					id="card number"
+					type="text"
+					placeholder="XXXX XXXX XXXX XXXX"
+					v-model="card.cardNumber"
+					@focus="removeSingleError"
+					maxlength="16"
+					required
+				/>
 			</div>
 			<div>
 				<label for="fullName">CARDHOLDER NAME</label>
-				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="41" required @focus="removeSingleError" />
+				<input
+					name="fullName"
+					id="name"
+					type="text"
+					placeholder="FirstName LastName"
+					v-model="card.cardHolder"
+					maxlength="30"
+					required
+					@focus="removeSingleError"
+				/>
 			</div>
 
 			<div class="month-year">
@@ -120,7 +138,7 @@ export default {
 		};
 	},
 	props: {
-		cards: Array
+		cards: Array,
 	},
 	computed: {
 		numberFormatting() {
@@ -131,6 +149,26 @@ export default {
 		},
 	},
 	methods: {
+		// preventLetter(e) {
+		// 	console.log(e);
+		// 	if (this.errors.includes("You cant have numbers in your name!")) {
+		// 		console.log("found");
+		// 		return;
+		// 	}
+		// 	if (!e.key.match(/\d/)) {
+		// 		this.errors.push("You can only have numbers in your card number!");
+		// 		e.preventDefault();
+		// 	}
+		// },
+					
+		// preventNum(e) { @keydown="preventNum($event)"
+		// 	console.log(e);
+		// 	this.errors.splice(this.errors.indexOf("You cant have numbers or special characters in your name!"), 1);
+		// 	if (!e.key.match(/[A-Öa-ö] §/)) {
+		// 		this.errors.push("You cant have numbers or special characters in your name!");
+		// 		e.preventDefault();
+		// 	}
+		// },
 		randomCvv() {
 			return String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4));
 		},
@@ -173,12 +211,12 @@ export default {
 
 			if (this.card.cardHolder === "") {
 				this.errors.push("You must fill out your name!");
-			} else if (this.card.cardHolder.match(/\d+/g)) {
-				this.errors.push("You cant have numbers in your name!");
+			} else if (this.card.cardHolder.match(/^[0-9!@#$%^§&*()_+\-=[\]{};':"\\|,.<>/?¨´]*$/g)) {
+				this.errors.push("You cant have numbers or special characters in your name!");
 			} else if (this.card.cardHolder.length < 4) {
 				this.errors.push("Your name must be longer than 3 letters, sorry!");
-			} else if (this.card.cardHolder.length > 40) {
-				this.errors.push("I'm sorry if you have a long name, but it cant be more than 40 letters!");
+			} else if (this.card.cardHolder.length > 29) {
+				this.errors.push("I'm sorry if you have a long name, but it cant be more than 29 letters!");
 			}
 
 			if (this.card.expireMonth === "") {
@@ -193,19 +231,19 @@ export default {
 				this.errors.push("Select a vendor!");
 			}
 
-			this.checkDupNum()
+			this.checkDupNum();
 
 			if (!this.errors.length) {
 				this.filledOutForm = true;
 				this.$emit("toHome");
 				this.submitCard();
-				this.cardColor = "#d0d0d0", //resetting card render cuz of keep alive vvvvv
-				this.card.vendor = "",
-				this.card.cardNumber = "",
-				this.card.cardHolder = "",
-				this.card.expireMonth = "",
-				this.card.expireYear = "",
-				this.card.CCV = null
+				(this.cardColor = "#d0d0d0"), //resetting card render cuz of keep alive vvvvv
+					(this.card.vendor = ""),
+					(this.card.cardNumber = ""),
+					(this.card.cardHolder = ""),
+					(this.card.expireMonth = ""),
+					(this.card.expireYear = ""),
+					(this.card.CCV = null);
 			}
 		},
 		removeSingleError(event) {
@@ -216,13 +254,13 @@ export default {
 				}
 			}
 		},
-		checkDupNum(){
+		checkDupNum() {
 			for (const value of this.cards) {
 				if (this.card.cardNumber === value.cardNumber) {
-					this.errors.push("A card with this number already exists!")
+					this.errors.push("A card with this number already exists!");
 				}
 			}
-		}
+		},
 	},
 };
 </script>
