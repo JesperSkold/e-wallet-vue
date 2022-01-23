@@ -1,6 +1,6 @@
 <template>
 	<div id="app">
-		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'"/>
+		<HomePage v-if="currentView === 'home'" :cards="cards" @toggleActive="toggleActive" @changeView="currentView = 'AddCard'" @delete="deleteEcho"/>
 		<keep-alive>
 		<AddCardPage v-if="currentView === 'AddCard'" @toHome="currentView ='home'" @card="saveCard" @goBack="currentView ='home'" :cards="cards"/>
 		</keep-alive>
@@ -37,6 +37,10 @@ export default {
 			this.cards[index].active = !this.cards[index].active;
 			localStorage.setItem("cards", JSON.stringify(this.cards));
 		},
+			deleteEcho(index){
+			this.cards.splice(index, 1)
+			localStorage.setItem("cards", JSON.stringify(this.cards));
+		}
 	},
 	created(){
 		if (localStorage.cards) {

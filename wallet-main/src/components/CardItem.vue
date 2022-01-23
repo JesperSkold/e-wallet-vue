@@ -6,6 +6,7 @@
 			<img v-else src="../assets/wifi.svg" alt="" class="signal" />
 			<img src="../assets/chip.svg" alt="" class="chip" />
 		</div>
+		<img src="../assets/delete.svg" alt="" srcset="" class="delete" @click.stop="$emit('delete', index)"/>
 		<p class="card-number">{{ numberFormatting }}</p>
 		<div class="bottom-text">
 			<div class="card-holder">
@@ -144,5 +145,12 @@ $maxCards: 50;
 .valid-text p {
 	padding: 0;
 	margin: 0;
+}
+
+.delete {
+	width: 3rem;
+	position: absolute;
+	margin-left: 37rem;
+	top: 3rem;
 }
 </style>

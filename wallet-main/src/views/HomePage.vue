@@ -4,7 +4,7 @@
 		<h5>ACTIVE CARD</h5>
 		<h5>{{ checkIfActives }}</h5>
 		<h5>{{ checkIfCards }}</h5>
-		<CardList :cards="cards" @toggleActive="toggleActive" />
+		<CardList :cards="cards" @toggleActive="toggleActive" @delete="deleteEcho"/>
 		<button @click="$emit('changeView')">ADD A NEW CARD</button>
 	</main>
 </template>
@@ -22,6 +22,9 @@ export default {
 		toggleActive(index) {
 			this.$emit("toggleActive", index);
 		},
+			deleteEcho(index){
+			this.$emit("delete", index)
+		}
 	},
 	computed: {
 		checkIfActives() {
