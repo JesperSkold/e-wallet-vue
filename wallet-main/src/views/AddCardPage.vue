@@ -1,6 +1,7 @@
 <template>
 	<main>
 		<h1>ADD NEW CARD</h1>
+		<img class="go-back" src="../assets/go_back.svg" alt="go back btn" @click="$emit('goBack')">
 		<h5>NEW CARD</h5>
 		<div class="card" :style="{ background: cardColor, color: textColor }">
 			<div class="vendor-placeholder">
@@ -24,7 +25,6 @@
 				</div>
 			</div>
 		</div>
-
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
@@ -229,6 +229,12 @@ div input {
 	width: 32rem;
 	display: block;
 }
+h1, h5 {
+	margin: 0;
+}
+h5{
+	margin-bottom: .5rem;
+}
 
 .month-year {
 	display: flex;
@@ -251,7 +257,6 @@ input,
 form > div {
 	margin: 1rem;
 }
-
 button {
 	cursor: pointer;
 	margin: 2rem 0;
@@ -327,5 +332,20 @@ button {
 .valid-text p {
 	padding: 0;
 	margin: 0;
+}
+
+.go-back{
+	// position: absolute;
+	// right: 60%;
+	// bottom: 90%;
+	margin-right: 31rem;
+	width: 5rem;
+	cursor: pointer;
+	color: white;
+	border-radius: 100%;
+	background: none;
+	&:hover{
+		background: #D0D0D0;
+	}
 }
 </style>
