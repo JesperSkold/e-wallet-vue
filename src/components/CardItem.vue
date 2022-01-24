@@ -1,13 +1,13 @@
 <template>
-	<div @click="$emit('activeCard', index)" :style="{ background: cardColor, color: textColor }" :class="layerIndex" class="card">
+	<div @click="$emit('activeCard', index)" :style="{ background: vendorColorHandler, color: textColorHandler }" :class="layerIndex" class="card">
 		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 		<div v-else class="vendor-placeholder"></div>
 		<div class="chip-signal-box">
 			<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" />
-			<img v-else src="../assets/wifi.svg" alt="" class="signal" />
-			<img src="../assets/chip.svg" alt="" class="chip" />
+			<img v-else src="../assets/wifi.svg" alt="wifi" class="signal" />
+			<img src="../assets/chip.svg" alt="wifi" class="chip" />
 		</div>
-		<img src="../assets/delete.svg" alt="" srcset="" class="delete" @click.stop="$emit('delete', index)" />
+		<img v-if="index !== undefined" src="../assets/delete.svg" alt="trashcan" srcset="" class="delete" @click.stop="$emit('delete', index)" />
 		<p class="card-number">{{ numberFormatting }}</p>
 		<div class="bottom-text">
 			<div class="card-holder">
@@ -18,7 +18,6 @@
 				<p class="valid-until">VALID UNTIL</p>
 				<p v-if="card.expireMonth === '' && card.expireYear === ''" class="valid-expire">MM / YY</p>
 				<p v-else class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
-				<!-- <p class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p> -->
 			</div>
 		</div>
 	</div>
@@ -34,34 +33,9 @@ export default {
 	data() {
 		return {
 			isActive: false,
-			textColor: "",
-			cardColor: "",
 		};
 	},
-	methods: {
-		colorHandler() {
-			switch (this.card.vendor) {
-				case "bitcoin":
-					this.cardColor = "#FFB84D";
-					this.textColor = "black";
-					break;
-				case "blockchain":
-					this.cardColor = "#8B58F9";
-					this.textColor = "white";
-					break;
-				case "evil":
-					this.cardColor = "#F33355";
-					this.textColor = "white";
-					break;
-				case "ninja":
-					this.cardColor = "#222222";
-					this.textColor = "white";
-					break;
-				default:
-					this.cardColor = "#d0d0d0";
-			}
-		},
-	},
+	methods: {},
 	computed: {
 		numberFormatting() {
 			if (this.card.cardNumber) {
@@ -69,20 +43,37 @@ export default {
 			}
 			return "";
 		},
-	},
-	mounted() {
-		this.colorHandler();
-	},
-	updated() {
-		//skicka in vendor istället eller något, updated inge bra
-		console.log("yo");
-		this.colorHandler();
+		vendorColorHandler() {
+			if (this.card.vendor === "bitcoin") {
+				return "#FFB84D";
+			} else if (this.card.vendor === "blockchain") {
+				return "#8B58F9";
+			} else if (this.card.vendor === "evil") {
+				return "#F33355";
+			} else if (this.card.vendor === "ninja") {
+				return "#222222";
+			} else {
+				return "#d0d0d0";
+			}
+		},
+		textColorHandler() {
+				if (this.card.vendor === "bitcoin") {
+				return "black";
+			} else if (this.card.vendor === "blockchain") {
+				return "white";
+			} else if (this.card.vendor === "evil") {
+				return "white";
+			} else if (this.card.vendor === "ninja") {
+				return "white";
+			} else {
+				return "black";
+			}
+		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
-// $step: 7rem;
 $maxCards: 50;
 @for $i from 0 through $maxCards {
 	.l-#{$i} {
