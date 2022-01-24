@@ -3,62 +3,20 @@
 		<h1>ADD NEW CARD</h1>
 		<img class="go-back" src="../assets/go_back.svg" alt="go back btn" @click="$emit('goBack')" />
 		<h5>NEW CARD</h5>
-		<!-- <div class="card" :style="{ background: cardColor, color: textColor }">
-			<div class="vendor-placeholder">
-				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
-			</div>
-			<div class="chip-signal-box">
-				<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" />
-				<img v-else src="../assets/wifi.svg" alt="" class="signal" />
-				<img src="../assets/chip.svg" alt="" class="chip" />
-			</div>
-			<p class="card-number">{{ numberFormatting }}</p>
-			<div class="bottom-text">
-				<div class="card-holder">
-					<p class="name">CARDHOLDER NAME</p>
-					<p class="real-name">{{ card.cardHolder }}</p>
-				</div>
-				<div class="valid-text">
-					<p class="valid-until">VALID UNTIL</p>
-					<p v-if="card.expireMonth === '' && card.expireYear === ''" class="valid-expire">MM / YY</p>
-					<p v-else class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
-				</div>
-			</div>
-		</div> -->
-		<CardItem :card="card"/>
+		<CardItem :card="card" class="noEmits" />
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
-				<input
-					name="cardNumber"
-					id="card number"
-					type="text"
-					placeholder="XXXX XXXX XXXX XXXX"
-					v-model="card.cardNumber"
-					@focus="removeSingleError"
-					maxlength="16"
-					required
-				/>
+				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="removeSingleError" maxlength="16" required />
 			</div>
 			<div>
 				<label for="fullName">CARDHOLDER NAME</label>
-				<input
-					name="fullName"
-					id="name"
-					type="text"
-					placeholder="FirstName LastName"
-					v-model="card.cardHolder"
-					maxlength="30"
-					required
-					@focus="removeSingleError"
-				/>
+				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="30" required @focus="removeSingleError" />
 			</div>
 
 			<div class="month-year">
 				<div class="month-container">
 					<label for="months">MONTH</label>
-					<!-- 12-->
-					<!-- <input type="number" /> -->
 					<select name="months" id="month" v-model="card.expireMonth" required @change="removeSingleError">
 						<option value="" disabled selected hidden></option>
 						<option value="01">01</option>
@@ -77,8 +35,6 @@
 				</div>
 				<div class="year-container">
 					<label for="years">YEAR</label>
-					<!-- 21-25-->
-					<!-- <input type="number" /> -->
 					<select name="years" id="year" v-model="card.expireYear" @change="removeSingleError" required>
 						<option value="" disabled selected hidden></option>
 						<option value="22">22</option>
@@ -92,14 +48,7 @@
 
 			<div class="vendor-container">
 				<label for="vendor">VENDOR</label>
-				<select
-					name="vendor"
-					id="vendor"
-					v-model="card.vendor"
-					@change="removeSingleError($event);
-					"
-					required
-				>
+				<select name="vendor" id="vendor" v-model="card.vendor" @change="removeSingleError($event)" required>
 					<option value="" disabled selected hidden></option>
 					<option value="bitcoin">Bitcoin Inc</option>
 					<option value="blockchain">Blockchain Inc</option>
@@ -117,10 +66,10 @@
 </template>
 
 <script>
-import CardItem from "../components/CardItem.vue"
+import CardItem from "../components/CardItem.vue";
 export default {
 	components: {
-		CardItem
+		CardItem,
 	},
 	data() {
 		return {
@@ -162,7 +111,7 @@ export default {
 		// 		e.preventDefault();
 		// 	}
 		// },
-					
+
 		// preventNum(e) { @keydown="preventNum($event)"
 		// 	console.log(e);
 		// 	this.errors.splice(this.errors.indexOf("You cant have numbers or special characters in your name!"), 1);
@@ -174,28 +123,6 @@ export default {
 		randomCvv() {
 			return String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4));
 		},
-		// changeCardColor() {
-		// 	switch (this.card.vendor) {
-		// 		case "bitcoin":
-		// 			this.cardColor = "#FFB84D";
-		// 			this.textColor = "black";
-		// 			break;
-		// 		case "blockchain":
-		// 			this.cardColor = "#8B58F9";
-		// 			this.textColor = "white";
-		// 			break;
-		// 		case "evil":
-		// 			this.cardColor = "#F33355";
-		// 			this.textColor = "white";
-		// 			break;
-		// 		case "ninja":
-		// 			this.cardColor = "#222222";
-		// 			this.textColor = "white";
-		// 			break;
-		// 		default:
-		// 			this.cardColor = "grey";
-		// 	}
-		// },
 		submitCard() {
 			this.$emit("card", { ...this.card });
 		},
@@ -268,9 +195,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .vendor-placeholder {
-// 	height: 4rem;
-// }
+.noEmits {
+	pointer-events: none;
+}
 main {
 	display: flex;
 	flex-direction: column;
@@ -290,6 +217,9 @@ div input {
 h1,
 h5 {
 	margin: 0;
+}
+h1{
+	margin-top: 1rem;
 }
 h5 {
 	margin-bottom: 0.5rem;
@@ -330,70 +260,6 @@ button {
 	}
 }
 
-// .card {
-// 	border: 1px black solid;
-// 	overflow: hidden;
-// 	border-radius: 1rem;
-// 	height: 21.8rem;
-// 	width: 35rem;
-// 	background: #d0d0d0;
-// 	margin-bottom: 2rem;
-// }
-// .vendor {
-// 	margin: 0.5rem 0 0 30rem;
-// }
-
-// .chip {
-// 	background: white;
-// 	border-radius: 0.5rem;
-// }
-
-// .chip-signal-box {
-// 	display: flex;
-// 	margin-left: 1rem;
-// 	flex-direction: column;
-// 	width: 4rem;
-// }
-
-// .card-number {
-// 	height: 3rem;
-// 	margin: 0.5rem;
-// 	padding: 0;
-// 	font-size: 3rem;
-// 	text-align: center;
-// }
-
-// .card-holder p {
-// 	margin: 0;
-// 	padding: 0;
-// }
-
-// .card-holder .name {
-// 	margin: 0.5rem 0;
-// }
-
-// .real-name {
-// 	font-size: 1.5rem;
-// }
-
-// .bottom-text {
-// 	display: flex;
-// 	margin: 1rem;
-// 	justify-content: space-between;
-// }
-// .valid-text .valid-until {
-// 	margin: 0.5rem 0;
-// }
-
-// .valid-expire {
-// 	text-align: end;
-// 	font-size: 1.5rem;
-// }
-// .valid-text p {
-// 	padding: 0;
-// 	margin: 0;
-// }
-
 .go-back {
 	// position: absolute;
 	// right: 60%;
@@ -408,5 +274,4 @@ button {
 		background: #d0d0d0;
 	}
 }
-
 </style>

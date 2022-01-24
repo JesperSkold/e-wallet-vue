@@ -150,10 +150,10 @@ button {
 }
 
 .add-btn {
-	margin-top: 2%;
+	margin-top: 0.5rem;
 	position: relative;
 	height: 4rem;
-	width: 35rem;
+	width: 28rem;
 	font-size: 1.6rem;
 	border-radius: 0.5rem;
 	background: none;

@@ -78,7 +78,7 @@ $maxCards: 50;
 @for $i from 0 through $maxCards {
 	.l-#{$i} {
 		position: absolute;
-		top: 30rem + ($i * 7);
+		top: 25rem + ($i * 7);
 		-webkit-box-shadow: 5px 5px 25px -6px rgba(0, 0, 0, 0.22);
 		box-shadow: 5px 5px 25px -6px rgba(0, 0, 0, 0.22);
 	}
@@ -86,6 +86,7 @@ $maxCards: 50;
 
 .card,
 .active {
+	transform: scale(0.8);
 	color: white;
 	border: 1px black solid;
 	width: 35rem;
