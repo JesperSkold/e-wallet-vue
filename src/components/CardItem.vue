@@ -1,21 +1,24 @@
 <template>
-	<div @click="$emit('activeCard', index)" :style="{ background: cardColor, color: textColor }" :class="layerIndex">
+	<div @click="$emit('activeCard', index)" :style="{ background: cardColor, color: textColor }" :class="layerIndex" class="card">
 		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
+		<div v-else class="vendor-placeholder"></div>
 		<div class="chip-signal-box">
 			<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" />
 			<img v-else src="../assets/wifi.svg" alt="" class="signal" />
 			<img src="../assets/chip.svg" alt="" class="chip" />
 		</div>
-		<img src="../assets/delete.svg" alt="" srcset="" class="delete" @click.stop="$emit('delete', index)"/>
+		<img src="../assets/delete.svg" alt="" srcset="" class="delete" @click.stop="$emit('delete', index)" />
 		<p class="card-number">{{ numberFormatting }}</p>
 		<div class="bottom-text">
 			<div class="card-holder">
 				<p class="name">CARDHOLDER NAME</p>
-				<p class="real-name">{{ card.cardHolder }}</p>
+				<p class="real-name">{{ card.cardHolder.toUpperCase() }}</p>
 			</div>
 			<div class="valid-text">
 				<p class="valid-until">VALID UNTIL</p>
-				<p class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
+				<p v-if="card.expireMonth === '' && card.expireYear === ''" class="valid-expire">MM / YY</p>
+				<p v-else class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
+				<!-- <p class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p> -->
 			</div>
 		</div>
 	</div>
@@ -35,6 +38,30 @@ export default {
 			cardColor: "",
 		};
 	},
+	methods: {
+		colorHandler() {
+			switch (this.card.vendor) {
+				case "bitcoin":
+					this.cardColor = "#FFB84D";
+					this.textColor = "black";
+					break;
+				case "blockchain":
+					this.cardColor = "#8B58F9";
+					this.textColor = "white";
+					break;
+				case "evil":
+					this.cardColor = "#F33355";
+					this.textColor = "white";
+					break;
+				case "ninja":
+					this.cardColor = "#222222";
+					this.textColor = "white";
+					break;
+				default:
+					this.cardColor = "#d0d0d0";
+			}
+		},
+	},
 	computed: {
 		numberFormatting() {
 			if (this.card.cardNumber) {
@@ -44,26 +71,12 @@ export default {
 		},
 	},
 	mounted() {
-		switch (this.card.vendor) {
-			case "bitcoin":
-				this.cardColor = "#FFB84D";
-				this.textColor = "black";
-				break;
-			case "blockchain":
-				this.cardColor = "#8B58F9";
-				this.textColor = "white";
-				break;
-			case "evil":
-				this.cardColor = "#F33355";
-				this.textColor = "white";
-				break;
-			case "ninja":
-				this.cardColor = "#222222";
-				this.textColor = "white";
-				break;
-			default:
-				this.cardColor = "grey";
-		}
+		this.colorHandler();
+	},
+	updated() {
+		//skicka in vendor istället eller något, updated inge bra
+		console.log("yo");
+		this.colorHandler();
 	},
 };
 </script>
@@ -80,7 +93,7 @@ $maxCards: 50;
 	}
 }
 
-.layer,
+.card,
 .active {
 	color: white;
 	border: 1px black solid;
@@ -94,6 +107,9 @@ $maxCards: 50;
 
 .vendor {
 	margin: 0.5rem 0 0 30rem;
+}
+.vendor-placeholder {
+	height: 4.8rem;
 }
 
 .chip {
@@ -153,7 +169,7 @@ $maxCards: 50;
 	position: absolute;
 	margin-left: 37rem;
 	top: 3rem;
-	&:hover{
+	&:hover {
 		opacity: 0.7;
 	}
 }

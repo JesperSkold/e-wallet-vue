@@ -96,9 +96,7 @@
 					name="vendor"
 					id="vendor"
 					v-model="card.vendor"
-					@change="
-						changeCardColor();
-						removeSingleError($event);
+					@change="removeSingleError($event);
 					"
 					required
 				>
@@ -176,28 +174,28 @@ export default {
 		randomCvv() {
 			return String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4));
 		},
-		changeCardColor() {
-			switch (this.card.vendor) {
-				case "bitcoin":
-					this.cardColor = "#FFB84D";
-					this.textColor = "black";
-					break;
-				case "blockchain":
-					this.cardColor = "#8B58F9";
-					this.textColor = "white";
-					break;
-				case "evil":
-					this.cardColor = "#F33355";
-					this.textColor = "white";
-					break;
-				case "ninja":
-					this.cardColor = "#222222";
-					this.textColor = "white";
-					break;
-				default:
-					this.cardColor = "grey";
-			}
-		},
+		// changeCardColor() {
+		// 	switch (this.card.vendor) {
+		// 		case "bitcoin":
+		// 			this.cardColor = "#FFB84D";
+		// 			this.textColor = "black";
+		// 			break;
+		// 		case "blockchain":
+		// 			this.cardColor = "#8B58F9";
+		// 			this.textColor = "white";
+		// 			break;
+		// 		case "evil":
+		// 			this.cardColor = "#F33355";
+		// 			this.textColor = "white";
+		// 			break;
+		// 		case "ninja":
+		// 			this.cardColor = "#222222";
+		// 			this.textColor = "white";
+		// 			break;
+		// 		default:
+		// 			this.cardColor = "grey";
+		// 	}
+		// },
 		submitCard() {
 			this.$emit("card", { ...this.card });
 		},
@@ -270,9 +268,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.vendor-placeholder {
-	height: 4rem;
-}
+// .vendor-placeholder {
+// 	height: 4rem;
+// }
 main {
 	display: flex;
 	flex-direction: column;
@@ -332,69 +330,69 @@ button {
 	}
 }
 
-.card {
-	border: 1px black solid;
-	overflow: hidden;
-	border-radius: 1rem;
-	height: 21.8rem;
-	width: 35rem;
-	background: #d0d0d0;
-	margin-bottom: 2rem;
-}
-.vendor {
-	margin: 0.5rem 0 0 30rem;
-}
+// .card {
+// 	border: 1px black solid;
+// 	overflow: hidden;
+// 	border-radius: 1rem;
+// 	height: 21.8rem;
+// 	width: 35rem;
+// 	background: #d0d0d0;
+// 	margin-bottom: 2rem;
+// }
+// .vendor {
+// 	margin: 0.5rem 0 0 30rem;
+// }
 
-.chip {
-	background: white;
-	border-radius: 0.5rem;
-}
+// .chip {
+// 	background: white;
+// 	border-radius: 0.5rem;
+// }
 
-.chip-signal-box {
-	display: flex;
-	margin-left: 1rem;
-	flex-direction: column;
-	width: 4rem;
-}
+// .chip-signal-box {
+// 	display: flex;
+// 	margin-left: 1rem;
+// 	flex-direction: column;
+// 	width: 4rem;
+// }
 
-.card-number {
-	height: 3rem;
-	margin: 0.5rem;
-	padding: 0;
-	font-size: 3rem;
-	text-align: center;
-}
+// .card-number {
+// 	height: 3rem;
+// 	margin: 0.5rem;
+// 	padding: 0;
+// 	font-size: 3rem;
+// 	text-align: center;
+// }
 
-.card-holder p {
-	margin: 0;
-	padding: 0;
-}
+// .card-holder p {
+// 	margin: 0;
+// 	padding: 0;
+// }
 
-.card-holder .name {
-	margin: 0.5rem 0;
-}
+// .card-holder .name {
+// 	margin: 0.5rem 0;
+// }
 
-.real-name {
-	font-size: 1.5rem;
-}
+// .real-name {
+// 	font-size: 1.5rem;
+// }
 
-.bottom-text {
-	display: flex;
-	margin: 1rem;
-	justify-content: space-between;
-}
-.valid-text .valid-until {
-	margin: 0.5rem 0;
-}
+// .bottom-text {
+// 	display: flex;
+// 	margin: 1rem;
+// 	justify-content: space-between;
+// }
+// .valid-text .valid-until {
+// 	margin: 0.5rem 0;
+// }
 
-.valid-expire {
-	text-align: end;
-	font-size: 1.5rem;
-}
-.valid-text p {
-	padding: 0;
-	margin: 0;
-}
+// .valid-expire {
+// 	text-align: end;
+// 	font-size: 1.5rem;
+// }
+// .valid-text p {
+// 	padding: 0;
+// 	margin: 0;
+// }
 
 .go-back {
 	// position: absolute;
@@ -410,4 +408,5 @@ button {
 		background: #d0d0d0;
 	}
 }
+
 </style>
