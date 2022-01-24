@@ -211,7 +211,7 @@ export default {
 
 			if (this.card.cardHolder === "") {
 				this.errors.push("You must fill out your name!");
-			} else if (this.card.cardHolder.match(/^[0-9!@#$%^§&*()_+\-=[\]{};':"\\|,.<>/?¨´]*$/g)) {
+			} else if (this.card.cardHolder.match(/[0-9!@#$%^§&*()_+\-=[\]{};':"\\|,.<>/?¨´]+/g)) {
 				this.errors.push("You cant have numbers or special characters in your name!");
 			} else if (this.card.cardHolder.length < 4) {
 				this.errors.push("Your name must be longer than 3 letters, sorry!");
