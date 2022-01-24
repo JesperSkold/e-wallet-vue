@@ -3,7 +3,7 @@
 		<h1>ADD NEW CARD</h1>
 		<img class="go-back" src="../assets/go_back.svg" alt="go back btn" @click="$emit('goBack')" />
 		<h5>NEW CARD</h5>
-		<div class="card" :style="{ background: cardColor, color: textColor }">
+		<!-- <div class="card" :style="{ background: cardColor, color: textColor }">
 			<div class="vendor-placeholder">
 				<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
 			</div>
@@ -24,8 +24,8 @@
 					<p v-else class="valid-expire">{{ card.expireMonth }} / {{ card.expireYear }}</p>
 				</div>
 			</div>
-		</div>
-
+		</div> -->
+		<CardItem :card="card"/>
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
@@ -119,7 +119,11 @@
 </template>
 
 <script>
+import CardItem from "../components/CardItem.vue"
 export default {
+	components: {
+		CardItem
+	},
 	data() {
 		return {
 			errors: [],
