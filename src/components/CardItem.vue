@@ -51,7 +51,7 @@ export default {
 			}
 		},
 		textColorHandler() {
-				if (this.card.vendor === "bitcoin") {
+			if (this.card.vendor === "bitcoin") {
 				return "black";
 			} else if (this.card.vendor === "blockchain") {
 				return "white";

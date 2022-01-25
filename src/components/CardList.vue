@@ -57,10 +57,4 @@ section {
 		padding: 0;
 	}
 }
-
-// .active {
-// 	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-// 	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-// 	box-shadow: 0px 0px 105px 15px rgba(255, 213, 46, 0.9);
-// }
 </style>

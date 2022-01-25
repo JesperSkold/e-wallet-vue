@@ -4,14 +4,35 @@
 		<img class="go-back" src="../assets/go_back.svg" alt="go back btn" @click="$emit('goBack')" />
 		<h5>NEW CARD</h5>
 		<CardItem :card="card" class="noEmits" />
+
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
-				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="removeSingleError" maxlength="16" @keydown="preventLetter($event)" required />
+				<input
+					name="cardNumber"
+					id="card number"
+					type="text"
+					placeholder="XXXX XXXX XXXX XXXX"
+					v-model="card.cardNumber"
+					@focus="removeSingleError"
+					maxlength="16"
+					@keydown="preventLetter($event)"
+					required
+				/>
 			</div>
 			<div>
 				<label for="fullName">CARDHOLDER NAME</label>
-				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="30" required @focus="removeSingleError" @keydown="preventNum($event)" />
+				<input
+					name="fullName"
+					id="name"
+					type="text"
+					placeholder="FirstName LastName"
+					v-model="card.cardHolder"
+					maxlength="30"
+					required
+					@focus="removeSingleError"
+					@keydown="preventNum($event)"
+				/>
 			</div>
 
 			<div class="month-year">
@@ -100,31 +121,15 @@ export default {
 		},
 	},
 	methods: {
-		// preventLetter(e) {
-		// 	console.log(e);
-		// 	if (this.errors.includes("You cant have numbers in your name!")) {
-		// 		console.log("found");
-		// 		return;
-		// 	}
-		// 	if (!e.key.match(/\d/)) {
-		// 		this.errors.push("You can only have numbers in your card number!");
-		// 		e.preventDefault();
-		// 	}
-		// },
-
-			preventLetter(e) {
-				console.log(e);
-				// this.errors.splice(this.errors.indexOf("You can only have numbers in your card number!"), 1);
-				if (!e.key.match(/\d|Backspace/)) {
-					// this.errors.push("You can only have numbers in your card number!");
-					e.preventDefault();
-				}
-			},
+		preventLetter(e) {
+			console.log(e);
+			if (!e.key.match(/\d|Backspace/)) {
+				e.preventDefault();
+			}
+		},
 		preventNum(e) {
 			console.log(e);
-			// this.errors.splice(this.errors.indexOf("You cant have numbers or special characters in your name!"), 1);
 			if (!e.key.match(/[A-Öa-ö\s]/) || e.key === "§") {
-				// this.errors.push("You cant have numbers or special characters in your name!");
 				e.preventDefault();
 			}
 		},
@@ -174,7 +179,7 @@ export default {
 				this.filledOutForm = true;
 				this.$emit("toHome");
 				this.submitCard();
-				(this.cardColor = "#d0d0d0"), //resetting card render cuz of keep alive vvvvv
+				(this.cardColor = "#d0d0d0"),
 					(this.card.vendor = ""),
 					(this.card.cardNumber = ""),
 					(this.card.cardHolder = ""),
@@ -187,7 +192,6 @@ export default {
 			for (const error of this.errors) {
 				if (error.includes(event.target.id)) {
 					this.errors.splice(this.errors.indexOf(error), 1);
-					console.log(this.errors);
 				}
 			}
 		},
@@ -226,7 +230,7 @@ h1,
 h5 {
 	margin: 0;
 }
-h1{
+h1 {
 	margin-top: 1rem;
 }
 h5 {
@@ -269,9 +273,6 @@ button {
 }
 
 .go-back {
-	// position: absolute;
-	// right: 60%;
-	// bottom: 90%;
 	margin-right: 31rem;
 	width: 5rem;
 	cursor: pointer;

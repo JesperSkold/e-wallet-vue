@@ -1,6 +1,5 @@
 <template>
 	<main>
-		<!-- <a href="top"></a> -->
 		<h1 id="pagetop">E-WALLET</h1>
 		<h5>ACTIVE CARD</h5>
 		<h5>{{ checkIfActives }}</h5>
@@ -22,7 +21,7 @@
 			</div>
 		</div>
 		<button class="add-btn" @click="$emit('changeView')">ADD A NEW CARD</button>
-		<img class="top" src="../assets/up.svg" alt="" @click="toTop" v-if="scY > 250"/>
+		<img class="top" src="../assets/up.svg" alt="" @click="toTop" v-if="scY > 250" />
 	</main>
 </template>
 
@@ -34,8 +33,8 @@ export default {
 	},
 	data() {
 		return {
-			scTimer: 0, //to top
-			scY: 0, //to top
+			scTimer: 0,
+			scY: 0,
 			showModal: false,
 			deleteIndex: null,
 		};
@@ -50,9 +49,8 @@ export default {
 		saveIndex(index) {
 			this.deleteIndex = index;
 			this.showModal = true;
-			console.log(index);
 		},
-		handleScroll: function () { //to top
+		handleScroll: function () {
 			if (this.scTimer) return;
 			this.scTimer = setTimeout(() => {
 				this.scY = window.scrollY;
@@ -83,7 +81,7 @@ export default {
 			return "You dont have any cards yet, click the add new card button to add cards.";
 		},
 	},
-	mounted() { //to top
+	mounted() {
 		window.addEventListener("scroll", this.handleScroll);
 	},
 };
@@ -139,7 +137,6 @@ main {
 		margin: 2rem 0;
 	}
 }
-
 button {
 	cursor: pointer;
 }
