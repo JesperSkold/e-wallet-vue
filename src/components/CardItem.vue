@@ -30,12 +30,6 @@ export default {
 		layerIndex: String,
 		index: Number,
 	},
-	data() {
-		return {
-			isActive: false,
-		};
-	},
-	methods: {},
 	computed: {
 		numberFormatting() {
 			if (this.card.cardNumber) {
@@ -84,8 +78,7 @@ $maxCards: 50;
 	}
 }
 
-.card,
-.active {
+.card {
 	transform: scale(0.8);
 	color: white;
 	border: 1px black solid;

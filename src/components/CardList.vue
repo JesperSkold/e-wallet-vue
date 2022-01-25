@@ -1,8 +1,8 @@
 <template>
 	<section>
-		<div v-for="(card, i) in cards" :key="card.cardNumber" class="card-container" >
-			<CardItem v-if="card.active" :card="card" class="active" @delete="deleteEcho" :index="i"/>
-			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer' + ' l-' + i" :index="i" @delete="deleteEcho"/>
+		<div v-for="(card, i) in cards" :key="card.cardNumber" class="card-container">
+			<CardItem v-if="card.active" :card="card" :style="{ 'box-shadow': activeShadowHandler }" @delete="deleteEcho" :index="i" />
+			<CardItem :card="card" @activeCard="toggleActive" :layerIndex="'layer' + ' l-' + i" :index="i" @delete="deleteEcho" />
 		</div>
 	</section>
 </template>
@@ -20,32 +20,47 @@ export default {
 		toggleActive(index) {
 			this.$emit("toggleActive", index);
 		},
-		deleteEcho(index){
+		deleteEcho(index) {
 			console.log(index);
-			this.$emit("delete", index)
-		}
-  }
+			this.$emit("delete", index);
+		},
+	},
+	computed: {
+		activeShadowHandler() {
+			for (const obj of this.cards) {
+				if (obj.active && obj.vendor === "bitcoin") {
+					return "0px 22px 40px 4px rgba(250, 178, 25, 0.96) ";
+				} else if (obj.active && obj.vendor === "blockchain") {
+					return "0px 22px 30px 4px rgba(133, 20, 204, 0.9)";
+				} else if (obj.active && obj.vendor === "evil") {
+					return "0px 22px 30px 4px rgba(204, 20, 56, 0.9)";
+				} else if (obj.active && obj.vendor === "ninja") {
+					return "0px 22px 30px 4px rgba(31, 24, 30, 0.9)";
+				}
+			}
+			return "";
+		},
+	},
 };
 </script>
 
 <style lang="scss" scoped>
-section{
-  min-height: 30vh;
+section {
+	min-height: 30vh;
 	margin: 0;
 	padding: 0;
 	position: relative;
 
-  .card-container{
-    min-width: 95vw;
-    margin: 0;
-    padding: 0;
-  }
+	.card-container {
+		min-width: 95vw;
+		margin: 0;
+		padding: 0;
+	}
 }
 
-.active {
-	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
-	box-shadow: 0px 0px 105px 15px rgba(255, 213, 46, 0.9);
-}
-
+// .active {
+// 	-webkit-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+// 	-moz-box-shadow: 0px 0px 105px 45px rgba(255, 213, 46, 0.9);
+// 	box-shadow: 0px 0px 105px 15px rgba(255, 213, 46, 0.9);
+// }
 </style>
