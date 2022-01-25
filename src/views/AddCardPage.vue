@@ -7,11 +7,11 @@
 		<form @submit.prevent="submitCard">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
-				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="removeSingleError" maxlength="16" required />
+				<input name="cardNumber" id="card number" type="text" placeholder="XXXX XXXX XXXX XXXX" v-model="card.cardNumber" @focus="removeSingleError" maxlength="16" @keydown="preventLetter($event)" required />
 			</div>
 			<div>
 				<label for="fullName">CARDHOLDER NAME</label>
-				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="30" required @focus="removeSingleError" />
+				<input name="fullName" id="name" type="text" placeholder="FirstName LastName" v-model="card.cardHolder" maxlength="30" required @focus="removeSingleError" @keydown="preventNum($event)" />
 			</div>
 
 			<div class="month-year">
@@ -112,14 +112,22 @@ export default {
 		// 	}
 		// },
 
-		// preventNum(e) { @keydown="preventNum($event)"
-		// 	console.log(e);
-		// 	this.errors.splice(this.errors.indexOf("You cant have numbers or special characters in your name!"), 1);
-		// 	if (!e.key.match(/[A-Öa-ö] §/)) {
-		// 		this.errors.push("You cant have numbers or special characters in your name!");
-		// 		e.preventDefault();
-		// 	}
-		// },
+			preventLetter(e) {
+				console.log(e);
+				// this.errors.splice(this.errors.indexOf("You can only have numbers in your card number!"), 1);
+				if (!e.key.match(/\d|Backspace/)) {
+					// this.errors.push("You can only have numbers in your card number!");
+					e.preventDefault();
+				}
+			},
+		preventNum(e) {
+			console.log(e);
+			// this.errors.splice(this.errors.indexOf("You cant have numbers or special characters in your name!"), 1);
+			if (!e.key.match(/[A-Öa-ö\s]/) || e.key === "§") {
+				// this.errors.push("You cant have numbers or special characters in your name!");
+				e.preventDefault();
+			}
+		},
 		randomCvv() {
 			return String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4));
 		},
@@ -138,7 +146,7 @@ export default {
 				this.errors.push("Your card number needs to be exactly 12 numbers!");
 			}
 
-			if (this.card.cardHolder === "") {
+			if (this.card.cardHolder === "" || this.card.cardHolder.match(/^\s+$/)) {
 				this.errors.push("You must fill out your name!");
 			} else if (this.card.cardHolder.match(/[0-9!@#$%^§&*()_+\-=[\]{};':"\\|,.<>/?¨´]+/g)) {
 				this.errors.push("You cant have numbers or special characters in your name!");
