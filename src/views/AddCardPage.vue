@@ -5,7 +5,7 @@
 		<h5>NEW CARD</h5>
 		<CardItem :card="card" class="noEmits" />
 
-		<form @submit.prevent="submitCard">
+		<form @submit.prevent="validateForm">
 			<div>
 				<label for="cardNumber">CARD NUMBER</label>
 				<input
@@ -81,7 +81,7 @@
 			<ul v-if="errors.length">
 				<li v-for="error in errors" :key="error">{{ error }}</li>
 			</ul>
-			<button @click="validateForm" type="button">ADD CARD</button>
+			<button @click="validateForm" type="submit">ADD CARD</button>
 		</form>
 	</main>
 </template>
@@ -123,7 +123,7 @@ export default {
 	methods: {
 		preventLetter(e) {
 			console.log(e);
-			if (!e.key.match(/\d|Backspace/)) {
+			if (!e.key.match(/\d|Backspace|Enter/)) {
 				e.preventDefault();
 			}
 		},
