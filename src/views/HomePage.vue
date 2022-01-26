@@ -35,8 +35,6 @@ export default {
 	},
 	data() {
 		return {
-			// scTimer: 0,
-			// scY: 0,
 			showModal: false,
 			deleteIndex: null,
 		};
@@ -52,20 +50,6 @@ export default {
 			this.deleteIndex = index;
 			this.showModal = true;
 		},
-		// handleScroll: function () {
-		// 	if (this.scTimer) return;
-		// 	this.scTimer = setTimeout(() => {
-		// 		this.scY = window.scrollY;
-		// 		clearTimeout(this.scTimer);
-		// 		this.scTimer = 0;
-		// 	}, 100);
-		// },
-		// toTop: function () {
-		// 	window.scrollTo({
-		// 		top: 0,
-		// 		behavior: "smooth",
-		// 	});
-		// },
 	},
 	computed: {
 		checkIfActives() {
@@ -83,9 +67,6 @@ export default {
 			return "You dont have any cards yet, click the add new card button to add cards.";
 		},
 	},
-	// mounted() {
-	// 	window.addEventListener("scroll", this.handleScroll);
-	// },
 };
 </script>
 
@@ -179,20 +160,21 @@ button {
 		font-size: 1rem;
 		margin-top: 22rem;
 	}
-	main {
-		// display: flex;
-		// justify-content: center;
-		// align-items: center;
-	}
-	h5{
+	h5 {
 		width: 100%;
 		text-align: center;
 	}
 
-	h5:nth-of-type(1){
+	h5:nth-of-type(1) {
 		position: absolute;
 		margin-top: 10rem;
 	}
-
+	.modal {
+		width: 16rem;
+		p {
+			width: 10rem;
+			text-align: center;
+		}
+	}
 }
 </style>

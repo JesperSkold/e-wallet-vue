@@ -281,4 +281,13 @@ button {
 		background: #d0d0d0;
 	}
 }
+@media screen and (max-width: 425px) {
+	form {
+		transform: scale(0.55);
+	}
+	.go-back{
+		margin-right: 16rem;
+		width: 4rem;
+	}
+}
 </style>

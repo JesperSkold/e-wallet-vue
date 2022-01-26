@@ -168,8 +168,11 @@ $maxCards: 75;
 		transform: scale(0.42);
 		position: absolute;
 	}
-}
-.delete{
-margin-left: 36rem;
+	.delete {
+		margin-left: 36rem;
+	}
+	.card-number {
+		font-size: 2.9rem;
+	}
 }
 </style>

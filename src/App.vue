@@ -39,7 +39,7 @@ export default {
 		},
 		deleteEcho(index) {
 			this.cards.splice(index, 1);
-			// localStorage.setItem("cards", JSON.stringify(this.cards));
+			localStorage.setItem("cards", JSON.stringify(this.cards));
 		},
 	},
 	created() {
@@ -70,8 +70,5 @@ p,
 label,
 li {
 	font-family: "PT Mono", monospace;
-}
-@media screen and (max-width: 425px) {
-	* { border: 1px solid black;}
 }
 </style>
