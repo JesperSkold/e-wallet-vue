@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$maxCards: 50;
+$maxCards: 75;
 @for $i from 0 through $maxCards {
 	.l-#{$i} {
 		position: absolute;
@@ -157,5 +157,19 @@ $maxCards: 50;
 	&:hover {
 		opacity: 0.7;
 	}
+}
+
+@media screen and (max-width: 425px) {
+	.card {
+		left: unset;
+		right: unset;
+		margin-left: unset;
+		margin-right: unset;
+		transform: scale(0.42);
+		position: absolute;
+	}
+}
+.delete{
+margin-left: 36rem;
 }
 </style>

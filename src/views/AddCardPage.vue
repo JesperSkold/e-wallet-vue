@@ -122,13 +122,11 @@ export default {
 	},
 	methods: {
 		preventLetter(e) {
-			console.log(e);
 			if (!e.key.match(/\d|Backspace|Enter/)) {
 				e.preventDefault();
 			}
 		},
 		preventNum(e) {
-			console.log(e);
 			if (!e.key.match(/[A-Öa-ö\s]/) || e.key === "§") {
 				e.preventDefault();
 			}
@@ -185,7 +183,7 @@ export default {
 					(this.card.cardHolder = ""),
 					(this.card.expireMonth = ""),
 					(this.card.expireYear = ""),
-					(this.card.CCV = null);
+					(this.card.CCV = this.randomCvv());
 			}
 		},
 		removeSingleError(event) {

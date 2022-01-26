@@ -1,6 +1,6 @@
 <template>
 	<main>
-		<h1 id="pagetop">E-WALLET</h1>
+		<h1>E-WALLET</h1>
 		<h5>ACTIVE CARD</h5>
 		<h5>{{ checkIfActives }}</h5>
 		<h5>{{ checkIfCards }}</h5>
@@ -21,20 +21,22 @@
 			</div>
 		</div>
 		<button class="add-btn" @click="$emit('changeView')">ADD A NEW CARD</button>
-		<img class="top" src="../assets/up.svg" alt="" @click="toTop" v-if="scY > 250" />
+		<back-to-top :bottom="50" bg-color="#141a1f"></back-to-top>
 	</main>
 </template>
 
 <script>
+import BackToTop from "@inotom/vue-go-top";
 import CardList from "../components/CardList.vue";
 export default {
 	components: {
+		BackToTop,
 		CardList,
 	},
 	data() {
 		return {
-			scTimer: 0,
-			scY: 0,
+			// scTimer: 0,
+			// scY: 0,
 			showModal: false,
 			deleteIndex: null,
 		};
@@ -50,20 +52,20 @@ export default {
 			this.deleteIndex = index;
 			this.showModal = true;
 		},
-		handleScroll: function () {
-			if (this.scTimer) return;
-			this.scTimer = setTimeout(() => {
-				this.scY = window.scrollY;
-				clearTimeout(this.scTimer);
-				this.scTimer = 0;
-			}, 100);
-		},
-		toTop: function () {
-			window.scrollTo({
-				top: 0,
-				behavior: "smooth",
-			});
-		},
+		// handleScroll: function () {
+		// 	if (this.scTimer) return;
+		// 	this.scTimer = setTimeout(() => {
+		// 		this.scY = window.scrollY;
+		// 		clearTimeout(this.scTimer);
+		// 		this.scTimer = 0;
+		// 	}, 100);
+		// },
+		// toTop: function () {
+		// 	window.scrollTo({
+		// 		top: 0,
+		// 		behavior: "smooth",
+		// 	});
+		// },
 	},
 	computed: {
 		checkIfActives() {
@@ -81,9 +83,9 @@ export default {
 			return "You dont have any cards yet, click the add new card button to add cards.";
 		},
 	},
-	mounted() {
-		window.addEventListener("scroll", this.handleScroll);
-	},
+	// mounted() {
+	// 	window.addEventListener("scroll", this.handleScroll);
+	// },
 };
 </script>
 
@@ -168,5 +170,29 @@ button {
 	&:hover {
 		opacity: 0.5;
 	}
+}
+
+@media screen and (max-width: 425px) {
+	.add-btn {
+		width: 15rem;
+		height: 3rem;
+		font-size: 1rem;
+		margin-top: 22rem;
+	}
+	main {
+		// display: flex;
+		// justify-content: center;
+		// align-items: center;
+	}
+	h5{
+		width: 100%;
+		text-align: center;
+	}
+
+	h5:nth-of-type(1){
+		position: absolute;
+		margin-top: 10rem;
+	}
+
 }
 </style>

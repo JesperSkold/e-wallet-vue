@@ -57,4 +57,18 @@ section {
 		padding: 0;
 	}
 }
+@media screen and (max-width: 425px) {
+	section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		min-height: 0;
+	}
+	.card-container {
+		min-width: 0 !important;
+		display: flex;
+		justify-content: center;
+	}
+}
 </style>
