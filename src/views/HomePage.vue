@@ -1,9 +1,9 @@
 <template>
 	<main>
 		<h1>E-WALLET</h1>
-		<h5>ACTIVE CARD</h5>
-		<h5>{{ checkIfActives }}</h5>
-		<h5>{{ checkIfCards }}</h5>
+		<h5 v-if="cards.length">ACTIVE CARD</h5>
+		<h5 v-if="cards.length">{{ checkIfActives }}</h5>
+		<h5 v-if="!cards.length">You dont have any cards yet, click the add new card button to add cards.</h5>
 		<CardList :cards="cards" @toggleActive="toggleActive" @delete="saveIndex" />
 		<div class="fade-layer" v-if="showModal"></div>
 		<div class="modal" v-if="showModal">
@@ -59,12 +59,6 @@ export default {
 				}
 			}
 			return "You dont have an active card yet, pick a card to activate it!";
-		},
-		checkIfCards() {
-			if (this.cards.length) {
-				return "";
-			}
-			return "You dont have any cards yet, click the add new card button to add cards.";
 		},
 	},
 };

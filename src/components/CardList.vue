@@ -21,7 +21,6 @@ export default {
 			this.$emit("toggleActive", index);
 		},
 		deleteEcho(index) {
-			console.log(index);
 			this.$emit("delete", index);
 		},
 	},
