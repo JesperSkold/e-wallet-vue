@@ -104,7 +104,7 @@ export default {
 				cardHolder: "",
 				expireMonth: "",
 				expireYear: "",
-				CCV: this.randomCvv(),
+				CCV: this.randomizeCvv(),
 				active: false,
 			},
 		};
@@ -183,7 +183,7 @@ export default {
 					(this.card.cardHolder = ""),
 					(this.card.expireMonth = ""),
 					(this.card.expireYear = ""),
-					(this.card.CCV = this.randomCvv());
+					(this.card.CCV = this.randomizeCvv());
 			}
 		},
 		removeSingleError(event) {
