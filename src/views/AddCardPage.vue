@@ -131,8 +131,8 @@ export default {
 				e.preventDefault();
 			}
 		},
-		randomCvv() {
-			return String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4)) + String(Math.floor(Math.random() * 4));
+		randomizeCvv() {
+			return String(Math.floor(Math.random() * 9)) + String(Math.floor(Math.random() * 9)) + String(Math.floor(Math.random() * 9));
 		},
 		submitCard() {
 			this.$emit("card", { ...this.card });
