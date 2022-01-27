@@ -26,7 +26,7 @@
 					name="fullName"
 					id="name"
 					type="text"
-					placeholder="FirstName LastName"
+					placeholder="Firstname Lastname"
 					v-model="card.cardHolder"
 					maxlength="30"
 					required
