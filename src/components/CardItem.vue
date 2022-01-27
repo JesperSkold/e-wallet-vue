@@ -1,13 +1,13 @@
 <template>
 	<div @click="$emit('activeCard', index)" :style="{ background: vendorColorHandler, color: textColorHandler }" :class="layerIndex" class="card">
-		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" />
+		<img v-if="card.vendor" :src="require(`../assets/${card.vendor}.svg`)" alt="currency" class="vendor" height="65" />
 		<div v-else class="vendor-placeholder"></div>
 		<div class="chip-signal-box">
-			<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" />
-			<img v-else src="../assets/wifi.svg" alt="wifi" class="signal" />
-			<img src="../assets/chip.svg" alt="wifi" class="chip" />
+			<img v-if="card.vendor === 'bitcoin' || card.vendor === 'ninja'" src="../assets/wifi_white.svg" alt="" class="signal" height="70" />
+			<img v-else src="../assets/wifi.svg" alt="wifi" class="signal" height="70"/>
+			<img src="../assets/chip.svg" alt="wifi" class="chip" height="50" width="62"/>
 		</div>
-		<img v-if="index !== undefined" src="../assets/delete.svg" alt="trashcan" srcset="" class="delete" @click.stop="$emit('delete', index)" />
+		<img v-if="index !== undefined" src="../assets/delete.svg" alt="trashcan" srcset="" class="delete" @click.stop="$emit('delete', index)" height="49" />
 		<p class="card-number">{{ numberFormatting }}</p>
 		<div class="bottom-text">
 			<div class="card-holder">
@@ -80,6 +80,7 @@ $maxCards: 75;
 
 .card {
 	transform: scale(0.8);
+	height: 22rem;
 	color: white;
 	border: 1px black solid;
 	width: 35rem;
@@ -94,12 +95,12 @@ $maxCards: 75;
 	margin: 0.5rem 0 0 30rem;
 }
 .vendor-placeholder {
-	height: 4.8rem;
+	height: 4.9rem;
 }
 
 .chip {
 	background: white;
-	border-radius: 0.5rem;
+	border-radius: 0.6rem;
 }
 
 .chip-signal-box {
@@ -161,6 +162,7 @@ $maxCards: 75;
 
 @media screen and (max-width: 425px) {
 	.card {
+		height: 21rem;
 		left: unset;
 		right: unset;
 		margin-left: unset;
